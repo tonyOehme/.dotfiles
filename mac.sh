@@ -1,17 +1,11 @@
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+eval "$("$(brew --prefix)"/bin/brew shellenv)"
 # terminal setup
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git clone https://github.com/tonyOehme/.dotfiles.git ~/.dotfiles
 mkdir personal
 mkdir studium
 mkdir work
 git clone https://github.com/tonyOehme/scripts.git ~/personal/scripts
-echo .DS_Store >> ~/.gitignore_global
-curl https://raw.githubusercontent.com/tonyOehme/dotfiles/main/terminal-configs/.zprofile > ~/.zprofile
-curl https://raw.githubusercontent.com/tonyOehme/dotfiles/main/.gitconfig > ~/.gitconfig
-curl https://raw.githubusercontent.com/tonyOehme/dotfiles/main/code-editors/Jetbrains/.ideavimrc > ~/.ideavimrc
-curl https://raw.githubusercontent.com/tonyOehme/dotfiles/main/terminal-configs/.zshrc > ~/.zshrc
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 nvm install 20
 curl https://sh.rustup.rs -sSf | sh
@@ -19,9 +13,6 @@ tmux source-file ~/.tmux.conf
 ssh-keygen -t ed25519 -C "go98mub@mytum.de"
 # brew setup
 xcode-select --install
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-(echo; echo 'eval "$('$(brew --prefix)'/bin/brew shellenv)"') >> ~/.zshrc
-eval "$("$(brew --prefix)"/bin/brew shellenv)"
 # mac settings
 sudo nvram "enable-ambient-light-sensor=0"
 defaults write -g NSWindowShouldDragOnGesture YES
@@ -48,19 +39,14 @@ defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 # terminal programs
 brew install neovim
-git clone https://github.com/tonyOehme/nvim.git ~/.config/nvim
-
 brew install fzf
-echo 'eval "$(fzf --zsh)"' >>~/.zshrc
-
 brew install tmux
-curl https://raw.githubusercontent.com/tonyOehme/dotfiles/main/terminal-configs/.tmux.conf > ~/.tmux.conf
-
 brew install git
 brew install tldr
 brew install ripgrep
 brew install yazi
-
+brew install stow
+stow ~/.dotfiles
 # mac specific things
 brew tap homebrew/cask-fonts
 brew install font-meslo-lg-nerd-font
