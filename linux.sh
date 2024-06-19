@@ -16,7 +16,9 @@ nvm install 20
 curl https://sh.rustup.rs -sSf | sh
 ssh-keygen -t ed25519 -C "go98mub@mytum.de"
 brew install stow
+cd ~/.dotfiles
 stow ~/.dotfiles
+cd ..
 brew install neovim
 brew install fzf
 brew install tmux
