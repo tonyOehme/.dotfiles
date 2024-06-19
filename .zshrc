@@ -109,7 +109,6 @@ alias y="yazi"
 alias a="tmux attach"
 alias gap="git commit -am \"automated push for university stuff\";git push"
 alias gmp="git commit -a;git push"
-alias updateconfig="curl https://raw.githubusercontent.com/tonyOehme/dotfiles/main/terminal-configs/.tmux.conf > ~/.tmux.conf;tmux source-file ~/.tmux.conf;curl https://raw.githubusercontent.com/tonyOehme/dotfiles/main/terminal-configs/.zshrc > ~/.zshrc;source ~/.zshrc;"
 
 # vi mode for zsh
 set -o vi

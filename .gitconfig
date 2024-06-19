@@ -18,13 +18,11 @@
 	colorMoved = true
 [color]
 	ui = auto
-
 [status]
     submoduleSummary = true
     showUntrackedFiles = all
 [merge]
 	conflictstyle = diff3
-
 [grep]
 	linenumber = true
     break = true
