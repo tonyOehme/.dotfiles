@@ -3,10 +3,11 @@ sudo apt-get update
 sudo apt-get install build-essential
 sudo apt install zsh
 chsh -s $(which zsh)
+zsh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 brew install fzf
-git clone https://github.com/tonyOehme/.dotfiles.git ~/.dotfiles
+git clone --recurse-submodules https://github.com/tonyOehme/.dotfiles.git ~/.dotfiles
 mkdir personal
 mkdir studium
 mkdir work
