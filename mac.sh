@@ -9,7 +9,6 @@ git clone https://github.com/tonyOehme/scripts.git ~/personal/scripts
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 nvm install 20
 curl https://sh.rustup.rs -sSf | sh
-tmux source-file ~/.tmux.conf
 ssh-keygen -t ed25519 -C "go98mub@mytum.de"
 # brew setup
 xcode-select --install
@@ -38,15 +37,18 @@ defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
 defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 # terminal programs
+brew install stow
+stow ~/.dotfiles
 brew install neovim
+git clone  git@github.com:tonyOehme/nvim.git ~/.config/nvim
 brew install fzf
 brew install tmux
+tmux source-file ~/.tmux.conf
 brew install git
 brew install tldr
 brew install ripgrep
 brew install yazi
-brew install stow
-stow ~/.dotfiles
+cargo install ttyper
 # mac specific things
 brew tap homebrew/cask-fonts
 brew install font-meslo-lg-nerd-font
