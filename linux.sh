@@ -1,9 +1,8 @@
 #!/bin/bash
 sudo apt-get update
-sudo apt-get install build-essential
 sudo apt install zsh
+sudo apt-get install build-essential
 chsh -s $(which zsh)
-zsh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 (echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> ~/.zshenv
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
