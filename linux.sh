@@ -24,6 +24,5 @@ brew install git
 brew install tldr
 brew install ripgrep
 brew install yazi
-cargo install ttyper
 source ~/.zshrc
 tmux source-file ~/.tmux.conf
