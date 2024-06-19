@@ -23,7 +23,7 @@
     submoduleSummary = true
     showUntrackedFiles = all
 [merge]
-	conflictstyle = zdiff3
+	conflictstyle = diff3
 [grep]
 	linenumber = true
     break = true
