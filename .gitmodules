@@ -1,9 +1,3 @@
-[submodule ".config/nvim"]
-	path = .config/nvim
-	url = git@github.com:tonyOehme/nvim.git
-[submodule ".config/alacritty/themes"]
-	path = .config/alacritty/themes
-	url = https://github.com/alacritty/alacritty-theme.git
 [submodule ".scripts"]
 	path = .scripts
 	url = git@github.com:tonyOehme/scripts.git
