@@ -14,5 +14,3 @@ size = 17
 
 [shell]
 program = "/bin/zsh"
-
-
