@@ -41,28 +41,29 @@ autoload -Uz compinit && compinit
 zinit cdreplay -q
 
 
-# Keybindings
-bindkey -e
-bindkey '^p' history-search-backward
-bindkey '^n' history-search-forward
-bindkey '^[w' kill-region
-
 # History
 HISTSIZE=5000
 HISTFILE=~/.zsh_history
 SAVEHIST=$HISTSIZE
 HISTDUP=erase
-setopt ALWAYS_TO_END
-setopt COMPLETE_IN_WORD
-setopt SHAREHISTORY
-setopt HIST_IGNORE_SPACE
-setopt HIST_IGNORE_ALL_DUPS
-setopt APPENDHISTORY
-setopt HIST_SAVE_NO_DUPS
-setopt HIST_IGNORE_DUPS
-setopt HIST_FIND_NO_DUPS
-setopt AUTOCD
-setopt VI
+
+setopt no_beep
+setopt no_list_beep
+set bell-style none
+setopt always_to_end
+setopt complete_in_word
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt appendhistory
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
+setopt autocd
+setopt vi
+setopt auto_menu
+setopt auto_name_dirs
+setopt menu_complete
 
 # Completion styling
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
