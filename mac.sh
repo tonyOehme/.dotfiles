@@ -54,6 +54,7 @@ brew tap homebrew/cask-fonts
 brew install font-meslo-lg-nerd-font
 brew install --cask shottr
 brew install --cask firefox
+brew install --cask protonvpn
 brew install --cask keka
 brew install --cask docker
 brew install --cask topnotch
