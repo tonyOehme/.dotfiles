@@ -5,8 +5,8 @@ sudo apt install zsh
 chsh -s $(which zsh)
 zsh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+(echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> ~/.zshenv
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-brew install fzf
 git clone --recurse-submodules https://github.com/tonyOehme/.dotfiles.git ~/.dotfiles
 mkdir personal
 mkdir studium
@@ -20,7 +20,6 @@ stow ~/.dotfiles
 brew install neovim
 brew install fzf
 brew install tmux
-tmux source-file ~/.tmux.conf
 brew install git
 brew install tldr
 brew install ripgrep
