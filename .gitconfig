@@ -1,0 +1,25 @@
+[user]
+	name = Tony Andy Oehme
+	email = tony-andy.oehme@adesso.de
+[init]
+	defaultBranch = main
+[core]
+	editor = nvim
+    pager = cat
+	excludesfile = ~/.gitignore_global
+    whitespace = -trailing-space
+[pull]
+	rebase = false
+[diff]
+    renames = true
+    submodule = log
+    mnemonicPrefix = true
+[color]
+	ui = auto
+
+[status]
+    submoduleSummary = true
+    showUntrackedFiles = all
+[merge]
+	conflictstyle = diff3
+
