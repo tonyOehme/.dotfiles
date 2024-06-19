@@ -103,7 +103,6 @@ fi
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-eval "$(fzf --zsh)"
 alias n="nvim ."
 alias ls="ls --color=auto -F"
 alias y="yazi"
@@ -117,4 +116,4 @@ set -o vi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
+[[ ! -f ~/.fzf.zsh ]] || source ~/.fzf.zsh
