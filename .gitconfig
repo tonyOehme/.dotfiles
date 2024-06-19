@@ -14,6 +14,7 @@
     renames = true
     submodule = log
     mnemonicPrefix = true
+	colorMoved = true
 [color]
 	ui = auto
 
@@ -23,3 +24,5 @@
 [merge]
 	conflictstyle = diff3
 
+[grep]
+	linenumber = true
