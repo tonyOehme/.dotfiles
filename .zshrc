@@ -107,6 +107,7 @@ alias gmp="git commit -a;git push"
 
 # vi mode for zsh
 set -o vi
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
