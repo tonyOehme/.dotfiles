@@ -1,6 +1,6 @@
 [user]
 	name = Tony Andy Oehme
-	email = tony-andy.oehme@adesso.de
+	email = tony-andy.oehme@tum.de
 [init]
 	defaultBranch = main
 [core]
@@ -9,8 +9,9 @@
 	excludesfile = ~/.gitignore_global
     whitespace = -trailing-space
 [pull]
-	rebase = false
+    ff = only
 [diff]
+    algorithm = histogram
     renames = true
     wordRegex = .
     submodule = log
@@ -18,15 +19,28 @@
 	colorMoved = true
 [color]
 	ui = auto
-
 [status]
     submoduleSummary = true
     showUntrackedFiles = all
 [merge]
-	conflictstyle = diff3
-
+	conflictstyle = zdiff3
 [grep]
 	linenumber = true
     break = true
     heading = true
     extendedRegexp = true
+[push]
+    autoSetupRemote = true
+    default = current
+[rerere]
+	enabled = true
+[commit]
+    verbose = true
+[submodule]
+    recurse = true
+[transfer]
+    fsckobjects = true
+[fetch]
+    fsckobjects = true
+[receive]
+    fsckObjects = true
