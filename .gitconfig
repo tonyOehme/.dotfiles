@@ -12,6 +12,7 @@
 	rebase = false
 [diff]
     renames = true
+    wordRegex = .
     submodule = log
     mnemonicPrefix = true
 	colorMoved = true
@@ -26,3 +27,6 @@
 
 [grep]
 	linenumber = true
+    break = true
+    heading = true
+    extendedRegexp = true
