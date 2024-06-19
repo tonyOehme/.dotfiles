@@ -1,6 +1,6 @@
 [submodule ".scripts"]
 	path = .scripts
-	url = git@github.com:tonyOehme/scripts.git
+	url = https://github.com/tonyOehme/scripts.git
 [submodule ".config/nvim"]
 	path = .config/nvim
 	url = git@github.com:tonyOehme/nvim.git
