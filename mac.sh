@@ -46,6 +46,7 @@ tmux source-file ~/.tmux.conf
 brew install git
 brew install tldr
 brew install ripgrep
+brew install zoxide
 brew install yazi
 cargo install ttyper
 # mac specific things

@@ -25,6 +25,7 @@ brew install tmux
 brew install git
 brew install tldr
 brew install ripgrep
+brew install zoxide
 brew install yazi
 source ~/.zshrc
 tmux source-file ~/.tmux.conf
