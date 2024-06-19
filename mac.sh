@@ -5,7 +5,6 @@ git clone https://github.com/tonyOehme/.dotfiles.git ~/.dotfiles
 mkdir personal
 mkdir studium
 mkdir work
-git clone https://github.com/tonyOehme/scripts.git ~/personal/scripts
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 nvm install 20
 curl https://sh.rustup.rs -sSf | sh
@@ -40,7 +39,6 @@ defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 brew install stow
 stow ~/.dotfiles
 brew install neovim
-git clone  git@github.com:tonyOehme/nvim.git ~/.config/nvim
 brew install fzf
 brew install tmux
 tmux source-file ~/.tmux.conf
