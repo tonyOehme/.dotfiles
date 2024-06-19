@@ -51,6 +51,9 @@ setopt no_beep
 setopt no_list_beep
 set bell-style none
 setopt always_to_end
+setopt auto_menu
+setopt auto_name_dirs
+setopt menu_complete
 setopt complete_in_word
 setopt sharehistory
 setopt hist_ignore_space
@@ -61,9 +64,6 @@ setopt hist_ignore_dups
 setopt hist_find_no_dups
 setopt autocd
 setopt vi
-setopt auto_menu
-setopt auto_name_dirs
-setopt menu_complete
 
 # Completion styling
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
