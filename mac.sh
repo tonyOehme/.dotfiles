@@ -2,7 +2,15 @@
 (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ~/.zshenv
 eval "$(/opt/homebrew/bin/brew shellenv)"
 # terminal setup
-git clone https://github.com/tonyOehme/.dotfiles.git ~/.dotfiles
+cd
+git clone --bare git@github.com:tonyOehme/.dotfiles.git
+cd ~/.dotfiles.git
+git worktree add main main
+cd main
+git submodule update --recursive --init
+stow --target=$HOME .
+rm -rf ~/Library/Application\ Support/Code/User/
+git clone https://github.com/tonyOehme/vscode-config.git ~/Library/Application\ Support/Code/User/
 mkdir personal
 mkdir studium
 mkdir work

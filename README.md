@@ -6,6 +6,7 @@ brew install stow
 ```
 ## Installation
 ```
+cd
 git clone --bare git@github.com:tonyOehme/.dotfiles.git
 cd ~/.dotfiles.git
 git worktree add main main

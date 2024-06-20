@@ -145,6 +145,4 @@ alias gap='git commit -am "automated push"; git push'
 [[ ! -f ~/.fzf.zsh ]] || source ~/.fzf.zsh
 [[ ! -f ~/.zprofile ]] || source ~/.zprofile
 # Shell integrations
-eval "$(zoxide init zsh)"
-
-
+eval "$(zoxide init --cmd cd zsh)"
