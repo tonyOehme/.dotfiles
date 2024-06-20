@@ -6,8 +6,11 @@ brew install stow
 ```
 ## Installation
 ```
-git clone --recurse-submodules -j8 git@github.com:tonyOehme/.dotfiles.git ~/.dotfiles
-cd ~/.dotfiles
-stow .
+git clone --bare git@github.com:tonyOehme/.dotfiles.git
+cd ~/.dotfiles.git
+git worktree add main main
+cd main
+git pull --recurse-submodules
+stow --target=[home-folder] .
 ```
 
