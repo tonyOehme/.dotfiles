@@ -131,8 +131,6 @@ setopt vi                     # use emacs keybindings in the shell
 # Completion styling
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # Aliases
 alias ls='ls --color -F'
@@ -149,5 +147,4 @@ alias gap='git commit -am "automated push"; git push'
 # Shell integrations
 eval "$(zoxide init zsh)"
 
-# To customize prompt, run `p10k configure` or edit ~/.dotfiles.git/main/.p10k.zsh.
-[[ ! -f ~/.dotfiles.git/main/.p10k.zsh ]] || source ~/.dotfiles.git/main/.p10k.zsh
+
