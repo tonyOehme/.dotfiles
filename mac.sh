@@ -9,7 +9,7 @@ mkdir work
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 nvm install 20
 curl https://sh.rustup.rs -sSf | sh
-ssh-keygen -t ed25519 -C "go98mub@mytum.de"
+ssh-keygen -t ed25519 -C "go98mub@mytum.de" -f ~/.ssh/id_personal_pc_github_personal
 # brew setup
 xcode-select --install
 # mac settings
