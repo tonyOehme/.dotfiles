@@ -706,6 +706,7 @@ brew install tmux
 tmux source-file ~/.tmux.conf
 brew install git
 brew install tldr
+brew install mailsy
 brew install ripgrep
 brew install zoxide
 brew install yazi

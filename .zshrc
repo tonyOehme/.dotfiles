@@ -148,3 +148,6 @@ alias gap='git commit -am "automated push"; git push'
 [[ ! -f ~/.zprofile ]] || source ~/.zprofile
 # Shell integrations
 eval "$(zoxide init zsh)"
+
+# To customize prompt, run `p10k configure` or edit ~/.dotfiles.git/main/.p10k.zsh.
+[[ ! -f ~/.dotfiles.git/main/.p10k.zsh ]] || source ~/.dotfiles.git/main/.p10k.zsh
