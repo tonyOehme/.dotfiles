@@ -138,6 +138,7 @@ alias n='nvim .'
 alias a='tmux attach'
 alias y='yazi'
 alias gap='git commit -am "automated push"; git push'
+alias gwtp='git pull origin $(git rev-parse --abbrev-ref HEAD)'
 
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
