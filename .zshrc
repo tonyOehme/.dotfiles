@@ -147,5 +147,4 @@ alias gwtp='git pull origin $(git rev-parse --abbrev-ref HEAD)'
 [[ ! -f ~/.fzf.zsh ]] || source ~/.fzf.zsh
 [[ ! -f ~/.zprofile ]] || source ~/.zprofile
 # Shell integrations
-eval $(opam env)
 eval "$(zoxide init --cmd cd zsh)"
