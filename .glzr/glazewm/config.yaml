@@ -232,7 +232,7 @@ keybindings:
 
   # Minimize focused window.
   - commands: ["toggle-minimized"]
-    bindings: ["alt+m"]
+    bindings: []
 
   # Close focused window.
   - commands: ["close"]
@@ -275,6 +275,8 @@ keybindings:
     bindings: ["alt+d"]
   - commands: ["focus --workspace text_editor"]
     bindings: ["alt+x"]
+  - commands: ["focus --workspace music"]
+    bindings: ["alt+m"]
   - commands: ["focus --workspace terminal"]
     bindings: ["alt+t"]
   - commands: ["focus --workspace 1"]
@@ -338,3 +340,4 @@ keybindings:
     bindings: ["alt+shift+8"]
   - commands: ["move --workspace 9"]
     bindings: ["alt+shift+9"]
+
