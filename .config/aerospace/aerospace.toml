@@ -214,7 +214,7 @@ run = 'move-node-to-workspace E'
 
 [[on-window-detected]]
 if.app-id = 'com.spotify.client'
-run = 'move-node-to-workspace S'
+run = 'move-node-to-workspace M'
 
 [[on-window-detected]]
 if.app-id = 'org.alacritty'
