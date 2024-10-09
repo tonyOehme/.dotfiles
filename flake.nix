@@ -36,6 +36,11 @@
             pkgs.jetbrains-toolbox
             pkgs.idea-ultimate
           ];
+        fonts.packages = [
+          (pkgs.nerdfonts.override {
+            fonts = [ "MesloLGS NF" "JetbrainsMono" ];
+          })
+        ];
 
         # Auto upgrade nix package and the daemon service.
         services.nix-daemon.enable = true;
