@@ -198,7 +198,7 @@ keybindings:
   # Change tiling direction. This determines where new tiling windows will
   # be inserted.
   - commands: ["toggle-tiling-direction"]
-    bindings: ["alt+v"]
+    bindings: ["alt+;"]
 
   # Change focus from tiling windows -> floating -> fullscreen.
   - commands: ["wm-cycle-focus"]
