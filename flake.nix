@@ -5,17 +5,19 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs }:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, nix-homebrew }:
     let
-      configuration = { pkgs, ... }: {
+      configuration = { pkgs, config, ... }: {
         # List packages installed in system profile. To search by name, run:
         nixpkgs.config.allowUnfree = true;
         # $ nix-env -qaP | grep wget
         environment.systemPackages =
           [
             pkgs.vim
+            pkgs.mkalias
             pkgs.stow
             pkgs.vesktop
             pkgs.neovim
@@ -36,15 +38,59 @@
             pkgs.kitty
             pkgs.wezterm
             pkgs.jetbrains-toolbox
-            pkgs.idea-ultimate
           ];
 
+        homebrew = {
+          enable = true;
+          casks = [
+            "alfred"
+            "firefox"
+            "maccy"
+            "aerospace"
+            "spotify"
+          ];
+          brews = [ "mas" ];
+          taps = [ ];
+          masApps = [ ];
+          onActivation.cleanup = "zap";
+          onActivation.autoUpdate = true;
+          onActivation.upgrade = true;
+        };
         fonts.packages = [
           (pkgs.nerdfonts.override {
             fonts = [ "MesloLGS NF" "JetbrainsMono" ];
           })
         ];
 
+        system.defaults = {
+          dock = {
+            autohide = true;
+            autohide-delay = 0.0;
+            autohide-time-modifier = 0.0;
+            expose-animation-duration = 0.0;
+            launchanim = false;
+          };
+
+          universalaccess = {
+            reduceMotion = true;
+            reduceTransparency = true;
+            mouseDriverCursorSize = 4.0;
+          };
+
+          finder = {
+            AppleShowAllExtensions = true;
+            AppleShowAllFiles = true;
+            FXPreferredViewStyle = "clmv";
+            ShowPathbar = true;
+          };
+          NSGlobalDomain = {
+            AppleMeasurementUnits = "Centimeters";
+            AppleShowAllExtensions = true;
+            AppleInterfaceStyle = "Dark";
+            AppleTemperatureUnit = "Celsius";
+          };
+          ".GlobalPreferences"."com.apple.mouse.scaling" = -1.0;
+        };
         system.activationScripts.applications.text =
           let
             env = pkgs.buildEnv {
@@ -91,11 +137,21 @@
     {
       # Build darwin flake using:
       # $ darwin-rebuild build --flake .#simple
-      darwinConfigurations."simple" = nix-darwin.lib.darwinSystem {
-        modules = [ configuration ];
+      darwinConfigurations."intel_mac" = nix-darwin.lib.darwinSystem {
+        modules = [
+          configuration
+          nix-homebrew.darwinModules.nix-homebrew
+          {
+            nix-homebrew = {
+              enable = true;
+              enableRosetta = true;
+              user = "tony-andy.oehme";
+            };
+          }
+        ];
       };
 
       # Expose the package set, including overlays, for convenience.
-      darwinPackages = self.darwinConfigurations."simple".pkgs;
+      darwinPackages = self.darwinConfigurations."intel_mac".pkgs;
     };
 }
