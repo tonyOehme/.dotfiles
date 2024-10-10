@@ -112,24 +112,6 @@ workspaces:
   - name: "9"
 
 window_rules:
-  - commands: ["move --workspace text_editor"]
-    match:
-      - window_process: { regex: "Code|idea" }
-  - commands: ["move --workspace browser"]
-    match:
-      - window_process: { regex: "chrome|zen|firefox" }
-  - commands: ["move --workspace email"]
-    match:
-      - window_process: { regex: "olk" }
-  - commands: ["move --workspace discord"]
-    match:
-      - window_process: { regex: "Discord" }
-  - commands: ["move --workspace music"]
-    match:
-      - window_process: { regex: "Spotify" }
-  - commands: ["move --workspace terminal"]
-    match:
-      - window_process: { regex: "WindowsTerminal" }
   - commands: ["ignore"]
     match:
       # Ignores any Zebar windows.
