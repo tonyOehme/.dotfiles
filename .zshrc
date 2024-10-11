@@ -139,7 +139,6 @@ alias gap='git commit -am "automated push"; git push'
 alias gwtp='git pull origin $(git rev-parse --abbrev-ref HEAD)'
 
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 [[ ! -f ~/.fzf.zsh ]] || source ~/.fzf.zsh
 [[ ! -f ~/.zprofile ]] || source ~/.zprofile
