@@ -34,7 +34,7 @@ return {
                 "tailwindcss",
                 "lua_ls",
                 "pyright",
-                "ts_ls",
+                "tsserver",
                 "yamlls",
             },
             handlers = {
