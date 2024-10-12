@@ -16,28 +16,6 @@
         # $ nix-env -qaP | grep wget
         environment.systemPackages =
           [
-            pkgs.vim
-            pkgs.mkalias
-            pkgs.stow
-            pkgs.vesktop
-            pkgs.neovim
-            pkgs.fzf
-            pkgs.tmux
-            pkgs.git
-            pkgs.tldr
-            pkgs.ripgrep
-            pkgs.thefuck
-            pkgs.zoxide
-            pkgs.yazi
-            pkgs.tldr
-            pkgs.eza
-            pkgs.ttyper
-            pkgs.docker
-            pkgs.vscode
-            pkgs.alacritty
-            pkgs.kitty
-            pkgs.wezterm
-            pkgs.jetbrains-toolbox
           ];
 
         homebrew = {
@@ -46,24 +24,47 @@
             "alfred"
             "firefox"
             "maccy"
-            "aerospace"
+            "nikitabobko/tap/aerospace"
+            "google-chrome"
+            "zen-browser"
             "spotify"
+            "visual-studio-code"
+            "kitty"
+            "wezterm"
+            "jetbrains-toolbox"
           ];
-          brews = [ "mas" ];
+          brews = [
+            "mas"
+            "vim"
+            "stow"
+            "neovim"
+            "fzf"
+            "docker"
+            "tmux"
+            "git"
+            "tldr"
+            "ripgrep"
+            "thefuck"
+            "zoxide"
+            "yazi"
+            "tldr"
+            "eza"
+          ];
           taps = [ ];
-         #masApps = [ ];
+          masApps = { };
           onActivation.cleanup = "zap";
           onActivation.autoUpdate = true;
           onActivation.upgrade = true;
         };
-        #fonts.packages = [
-         # (pkgs.nerdfonts.override {
-          #  fonts = [ "MesloLGS NF" "JetbrainsMono" ];
-          #})
-#        ];
+        fonts.packages = [
+          (pkgs.nerdfonts.override {
+            fonts = [ "JetbrainsMono" ];
+          })
+        ];
 
         system.defaults = {
           dock = {
+            mineffect = "scale";
             autohide = true;
             autohide-delay = 0.0;
             autohide-time-modifier = 0.0;
@@ -71,17 +72,22 @@
             launchanim = false;
           };
 
-          universalaccess = {
-            reduceMotion = true;
-            reduceTransparency = true;
-            mouseDriverCursorSize = 4.0;
-          };
+          # universalaccess = {
+          #   reduceMotion = true;
+          #   reduceTransparency = true;
+          #   mouseDriverCursorSize = 4.0;
+          # };
+          keyboard = { swapLeftCtrlAndFn = true; };
 
           finder = {
             AppleShowAllExtensions = true;
             AppleShowAllFiles = true;
             FXPreferredViewStyle = "clmv";
             ShowPathbar = true;
+          };
+          menuExtraClock = {
+            Show24Hour = true;
+            showDate = 1;
           };
           NSGlobalDomain = {
             AppleMeasurementUnits = "Centimeters";
@@ -91,26 +97,26 @@
           };
           ".GlobalPreferences"."com.apple.mouse.scaling" = -1.0;
         };
-       # system.activationScripts.applications.text =
-      #    let
-     #       env = pkgs.buildEnv {
-    #          #name = "system-applications";
-             # paths = config.environment.systemPackages;
-            #  pathsToLink = "/Applications";
-           # };
-          #in
-          #pkgs.lib.mkForce ''
-            # Set up applications.
-         #   echo "setting up /Applications..." >&2
+        # system.activationScripts.applications.text =
+        #    let
+        #       env = pkgs.buildEnv {
+        #          #name = "system-applications";
+        # paths = config.environment.systemPackages;
+        #  pathsToLink = "/Applications";
+        # };
+        #in
+        #pkgs.lib.mkForce ''
+        # Set up applications.
+        #   echo "setting up /Applications..." >&2
         #    rm -rf /Applications/Nix\ Apps
-       #     mkdir -p /Applications/Nix\ Apps
-      #      find ${env}/Applications -maxdepth 1 -type l -exec readlink '{}' + |
-     #       while read src; do
-              #app_name=$(basename "$src")
-             # echo "copying $src" >&2
-            #  ${pkgs.mkalias}/bin/mkalias "$src" "/Applications/Nix Apps/$app_name"
-           # done
-          #'';
+        #     mkdir -p /Applications/Nix\ Apps
+        #      find ${env}/Applications -maxdepth 1 -type l -exec readlink '{}' + |
+        #       while read src; do
+        #app_name=$(basename "$src")
+        # echo "copying $src" >&2
+        #  ${pkgs.mkalias}/bin/mkalias "$src" "/Applications/Nix Apps/$app_name"
+        # done
+        #'';
 
         # Auto upgrade nix package and the daemon service.
         services.nix-daemon.enable = true;
@@ -131,13 +137,13 @@
         system.stateVersion = 5;
 
         # The platform the configuration will be used on.
-        nixpkgs.hostPlatform = "x86_64-darwin";
+        nixpkgs.hostPlatform = "aarch64-darwin";
       };
     in
     {
       # Build darwin flake using:
       # $ darwin-rebuild build --flake .#simple
-      darwinConfigurations."intel_mac" = nix-darwin.lib.darwinSystem {
+      darwinConfigurations."apple_silicon_mac" = nix-darwin.lib.darwinSystem {
         modules = [
           configuration
           nix-homebrew.darwinModules.nix-homebrew
@@ -145,12 +151,13 @@
             nix-homebrew = {
               enable = true;
               user = "tony-andy.oehme";
+              enableRosetta = true;
             };
           }
         ];
       };
 
       # Expose the package set, including overlays, for convenience.
-      darwinPackages = self.darwinConfigurations."intel_mac".pkgs;
+      darwinPackages = self.darwinConfigurations."apple_silicon_mac".pkgs;
     };
 }

@@ -52,7 +52,7 @@ brew install --cask spotify
 brew install --cask jetbrains-toolbox
 brew install --cask microsoft-office
 brew install --cask visual-studio-code
-brew install --cask aerospace
+brew install --cask rectangle
 # spotify blockthespot
 bash <(curl -sSL https://raw.githubusercontent.com/Nuzair46/BlockTheSpot-Mac/main/install.sh)
 # mac settings
