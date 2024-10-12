@@ -79,26 +79,43 @@
           #   reduceTransparency = true;
           #   mouseDriverCursorSize = 4.0;
           # };
+
           keyboard = { swapLeftCtrlAndFn = true; };
 
           finder = {
             AppleShowAllExtensions = true;
             AppleShowAllFiles = true;
             FXPreferredViewStyle = "clmv";
+            _FXShowPosixPathInTitle = true;
+            _FXShowPosixPathInTitle = "SCcf";
             ShowPathbar = true;
+            ShowStatusBar = true;
           };
+
+          screensaver = {
+            askForPassword = true;
+            askForPasswordDelay = 0;
+          };
+
           menuExtraClock = {
             Show24Hour = true;
             showDate = 1;
           };
+
           NSGlobalDomain = {
             AppleMeasurementUnits = "Centimeters";
             AppleShowAllExtensions = true;
+            AppleShowScrollBars = "Always";
+            KeyRepeat = 1;
+            InitialKeyRepeat = 10;
             AppleInterfaceStyle = "Dark";
             AppleTemperatureUnit = "Celsius";
           };
+
           ".GlobalPreferences"."com.apple.mouse.scaling" = -1.0;
+
         };
+
         # system.activationScripts.applications.text =
         #    let
         #       env = pkgs.buildEnv {
