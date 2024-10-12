@@ -56,11 +56,11 @@
           onActivation.autoUpdate = true;
           onActivation.upgrade = true;
         };
-        fonts.packages = [
-          (pkgs.nerdfonts.override {
-            fonts = [ "MesloLGS NF" "JetbrainsMono" ];
-          })
-        ];
+        #fonts.packages = [
+         # (pkgs.nerdfonts.override {
+          #  fonts = [ "MesloLGS NF" "JetbrainsMono" ];
+          #})
+#        ];
 
         system.defaults = {
           dock = {
