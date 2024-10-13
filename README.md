@@ -15,7 +15,7 @@ git submodule foreach git pull
 stow --target=$HOME .
 ```
 ```
-sh <(curl -L https://nixos.org/nix/install)  
-nix-shell -p git --run 'git clone https://github.com/tonyOehme/.dotfiles.git ~/personal/.dotfiles'  
-nix run nix-darwin --extra-experimental-features 'nix-command flakes' --switch --flake ~/personal/.dotfiles/flake.nix#tony-andy.oehme  
+sh <(curl -L https://nixos.org/nix/install)
+nix-shell -p git --run 'git clone https://github.com/tonyOehme/.dotfiles.git ~/personal/.dotfiles'
+nix run nix-darwin --extra-experimental-features 'nix-command flakes' -- switch --flake ~/personal/.dotfiles/flake.nix#tony-andy.oehme
 ```
