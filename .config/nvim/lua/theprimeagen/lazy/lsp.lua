@@ -36,6 +36,7 @@ return {
                 "pyright",
                 "ts_ls",
                 "yamlls",
+                "rnix",
             },
             handlers = {
                 function(server_name) -- default handler (optional)
