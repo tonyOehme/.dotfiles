@@ -8,8 +8,8 @@ local config = wezterm.config_builder()
 
 -- my coolnight colorscheme
 
-config.font = wezterm.font("JetbrainsMono")
-config.color_scheme = "Dracula (base16)"
+config.font = wezterm.font("MesloLGS Nerd Font Mono")
+config.color_scheme = "OneDark (base16)"
 config.font_size = 19
 config.window_padding = {
     left = 0,
