@@ -76,9 +76,8 @@
             mineffect = "scale";
             enable-spring-load-actions-on-all-items = true;
             persistent-apps = [
-              "/Applications/Nix\ Apps/Alacritty.app"
+              "/Applications/WezTerm.app"
               "/Applications/Google\ Chrome.app"
-              "/Applications/Nix\ Apps/Vesktop.app"
               "/Applications/Spotify.app"
               "/Applications/Microsoft\ Teams.app"
             ];
@@ -230,6 +229,6 @@
       };
 
       # Expose the package set, including overlays, for convenience.
-      darwinPackages = self.darwinConfigurations."intel_mac".pkgs;
+      darwinPackages = [ self.darwinConfigurations."intel_mac".pkgs ];
     };
 }
