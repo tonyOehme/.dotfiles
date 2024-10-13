@@ -229,6 +229,6 @@
       };
 
       # Expose the package set, including overlays, for convenience.
-      darwinPackages =[  self.darwinConfigurations."intel_mac".pkgs] ;
+      darwinPackages =  self.darwinConfigurations."intel_mac".pkgs ;
     };
 }
