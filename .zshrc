@@ -62,8 +62,8 @@ unsetopt menu_complete         # don't autoselect the first completion entry
 
 # Expansion and Globbing
 # http://zsh.sourceforge.net/Doc/Release/Options.html#Expansion-and-Globbing
-setopt extended_glob           # use more awesome globbing features
-setopt glob_dots               # include dotfiles when globbing
+unsetopt extended_glob           # use more awesome globbing features
+unsetopt glob_dots               # include dotfiles when globbing
 
 # History
 # http://zsh.sourceforge.net/Doc/Release/Options.html#History
