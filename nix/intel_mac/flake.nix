@@ -14,26 +14,27 @@
         # List packages installed in system profile. To search by name, run:
         # $ nix-env -qaP | grep wget
         nixpkgs.config.allowUnfree = true;
-        environment.systemPackages =
+        environment.systemPackages = with pkgs;
           [
-            pkgs.vim
-            pkgs.yazi
-            pkgs.mkalias
-            pkgs.neovim
-            pkgs.git
-            pkgs.tmux
-            pkgs.tldr
-            pkgs.thefuck
-            pkgs.fzf
-            pkgs.zoxide
-            pkgs.eza
-            pkgs.ripgrep
-            pkgs.alacritty
-            pkgs.docker
-            pkgs.kitty
-            pkgs.vscode
-            pkgs.stow
-            pkgs.nodejs_20
+            vim
+            yazi
+            mkalias
+            neovim
+            git
+            tmux
+            tldr
+            thefuck
+            fzf
+            zoxide
+            vesktop
+            eza
+            ripgrep
+            alacritty
+            docker
+            kitty
+            vscode
+            stow
+            nodejs_20
           ];
 
         homebrew = {
@@ -44,12 +45,12 @@
             "google-chrome"
             "protonvpn"
             "microsoft-office"
+            "microsoft-teams"
             "alfred"
             "shottr"
             "zen-browser"
             "wezterm"
             "iina"
-            "wezterm"
             # macOS Ventura
             # "maccy"
             # macOS Sonoma
@@ -74,6 +75,13 @@
           dock = {
             mineffect = "scale";
             enable-spring-load-actions-on-all-items = true;
+            persistent-apps = [
+              "/Applications/Nix\ Apps/Alacritty.app"
+              "/Applications/Google\ Chrome.app"
+              "/Applications/Nix\ Apps/Vesktop.app"
+              "/Applications/Spotify.app"
+              "/Applications/Microsoft\ Teams.app"
+            ];
             orientation = "bottom";
             autohide = true;
             tilesize = 128;
@@ -85,6 +93,7 @@
             launchanim = false;
             expose-group-by-app = false;
             show-process-indicators = true;
+            show-recents = false;
             minimize-to-application = true;
             mru-spaces = false;
           };
