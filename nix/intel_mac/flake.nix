@@ -204,30 +204,27 @@
         system.stateVersion = 5;
 
         # The platform the configuration will be used on.
-        nixpkgs.hostPlatform = "x86_64-darwin";
       };
     in
     {
       # Build darwin flake using:
       # $ darwin-rebuild build --flake .#simple
-      darwinConfigurations."intel_mac" = nix-darwin.lib.darwinSystem {
-        modules = [
-          configuration
-          nix-homebrew.darwinModules.nix-homebrew
-          {
-            nix-homebrew = {
-              # Install Homebrew under the default prefix
-              enable = true;
-
-              # Apple Silicon Only: Also install Homebrew under the default Intel prefix for Rosetta 2
-
-              # User owning the Homebrew prefix
-              user = "tony-andy.oehme";
-
-              # Automatically migrate existing Homebrew installations
-            };
-          }
-        ];
+      darwinConfigurations = {
+        "intel_mac" = nix-darwin.lib.darwinSystem {
+          nixpkgs.hostPlatform = "x86_64-darwin";
+          modules = [
+            configuration
+            nix-homebrew.darwinModules.nix-homebrew
+            {
+              nix-homebrew = {
+                # Install Homebrew under the default prefix
+                enable = true;
+                # enableRoseta = true;
+                user = "tony-andy.oehme";
+              };
+            }
+          ];
+        };
       };
 
       # Expose the package set, including overlays, for convenience.
