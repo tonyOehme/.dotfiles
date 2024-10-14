@@ -25,6 +25,7 @@
             tldr
             thefuck
             fzf
+            zsh
             zoxide
             vesktop
             eza
@@ -51,6 +52,8 @@
             "zen-browser"
             "wezterm"
             "iina"
+            "keka"
+            "rectangle"
             # macOS Ventura
             # "maccy"
             # macOS Sonoma
@@ -128,6 +131,7 @@
           NSGlobalDomain = {
             AppleInterfaceStyle = "Dark";
             ApplePressAndHoldEnabled = false;
+            AppleMetricUnits = 1;
             AppleTemperatureUnit = "Celsius";
             AppleFontSmoothing = 1;
             AppleShowScrollBars = "Always";
@@ -229,6 +233,6 @@
       };
 
       # Expose the package set, including overlays, for convenience.
-      darwinPackages =  self.darwinConfigurations."intel_mac".pkgs ;
+      darwinPackages = self.darwinConfigurations."intel_mac".pkgs;
     };
 }

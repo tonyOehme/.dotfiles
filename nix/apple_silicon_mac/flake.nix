@@ -8,47 +8,56 @@
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, nix-homebrew }:
+  outputs = inputs@{ self, nix-homebrew, nix-darwin, nixpkgs }:
     let
       configuration = { pkgs, config, ... }: {
         # List packages installed in system profile. To search by name, run:
-        nixpkgs.config.allowUnfree = true;
         # $ nix-env -qaP | grep wget
-        environment.systemPackages =
+        nixpkgs.config.allowUnfree = true;
+        environment.systemPackages = with pkgs;
           [
+            vim
+            yazi
+            mkalias
+            neovim
+            git
+            tmux
+            tldr
+            thefuck
+            fzf
+            zoxide
+            vesktop
+            eza
+            ripgrep
+            alacritty
+            docker
+            kitty
+            vscode
+            stow
+            nodejs_20
           ];
 
         homebrew = {
           enable = true;
           casks = [
-            "alfred"
             "firefox"
-            "maccy"
-            "nikitabobko/tap/aerospace"
-            "google-chrome"
-            "zen-browser"
-            "spotify"
-            "visual-studio-code"
-            "kitty"
-            "wezterm"
             "jetbrains-toolbox"
+            "google-chrome"
+            "protonvpn"
+            "microsoft-office"
+            "microsoft-teams"
+            "alfred"
+            "shottr"
+            "zen-browser"
+            "wezterm"
+            "iina"
+            # macOS Ventura
+            "maccy"
+            # macOS Sonoma
+            "nikitabobko/tap/aerospace"
           ];
           brews = [
             "mas"
-            "vim"
-            "stow"
-            "neovim"
-            "fzf"
-            "docker"
-            "tmux"
-            "git"
-            "tldr"
-            "ripgrep"
-            "thefuck"
-            "zoxide"
-            "yazi"
-            "tldr"
-            "eza"
           ];
           taps = [ ];
           masApps = { };
@@ -56,20 +65,36 @@
           onActivation.autoUpdate = true;
           onActivation.upgrade = true;
         };
-        fonts.packages = [
-          (pkgs.nerdfonts.override {
-            fonts = [ "JetbrainsMono" ];
-          })
-        ];
+
+        system.keyboard = {
+          enableKeyMapping = true;
+          swapLeftCtrlAndFn = true;
+        };
 
         system.defaults = {
           dock = {
             mineffect = "scale";
+            enable-spring-load-actions-on-all-items = true;
+            persistent-apps = [
+              "/Applications/WezTerm.app"
+              "/Applications/Google\ Chrome.app"
+              "/Applications/Spotify.app"
+              "/Applications/Microsoft\ Teams.app"
+            ];
+            orientation = "bottom";
             autohide = true;
+            tilesize = 128;
             autohide-delay = 0.0;
             autohide-time-modifier = 0.0;
+            dashboard-in-overlay = true;
+            mouse-over-hilite-stack = true;
             expose-animation-duration = 0.0;
             launchanim = false;
+            expose-group-by-app = false;
+            show-process-indicators = true;
+            show-recents = false;
+            minimize-to-application = true;
+            mru-spaces = false;
           };
 
           # universalaccess = {
@@ -77,46 +102,86 @@
           #   reduceTransparency = true;
           #   mouseDriverCursorSize = 4.0;
           # };
-          keyboard = { swapLeftCtrlAndFn = true; };
 
           finder = {
             AppleShowAllExtensions = true;
             AppleShowAllFiles = true;
+            _FXSortFoldersFirst = true;
+            QuitMenuItem = true;
             FXPreferredViewStyle = "clmv";
+            _FXShowPosixPathInTitle = true;
+            FXEnableExtensionChangeWarning = true;
             ShowPathbar = true;
+            ShowStatusBar = true;
           };
+
+          screensaver = {
+            askForPassword = true;
+            askForPasswordDelay = 0;
+          };
+
           menuExtraClock = {
             Show24Hour = true;
-            showDate = 1;
+            ShowDate = 1;
           };
+
           NSGlobalDomain = {
+            AppleInterfaceStyle = "Dark";
+            ApplePressAndHoldEnabled = false;
+            AppleTemperatureUnit = "Celsius";
+            AppleFontSmoothing = 1;
+            AppleShowScrollBars = "Always";
             AppleMeasurementUnits = "Centimeters";
             AppleShowAllExtensions = true;
-            AppleInterfaceStyle = "Dark";
-            AppleTemperatureUnit = "Celsius";
+            NSAutomaticSpellingCorrectionEnabled = false;
+            NSAutomaticQuoteSubstitutionEnabled = false;
+            NSAutomaticPeriodSubstitutionEnabled = false;
+            NSAutomaticDashSubstitutionEnabled = false;
+            NSAutomaticCapitalizationEnabled = false;
+            NSTableViewDefaultSizeMode = 2;
+            NSUseAnimatedFocusRing = false;
+            NSNavPanelExpandedStateForSaveMode = true;
+            NSNavPanelExpandedStateForSaveMode2 = true;
+            NSWindowShouldDragOnGesture = true;
+            NSAutomaticInlinePredictionEnabled = false;
+            PMPrintingExpandedStateForPrint = true;
+            PMPrintingExpandedStateForPrint2 = true;
+            "com.apple.springing.enabled" = true;
+            "com.apple.springing.delay" = 0.0;
+            NSAutomaticWindowAnimationsEnabled = false;
+            KeyRepeat = 1;
+            InitialKeyRepeat = 10;
           };
+
           ".GlobalPreferences"."com.apple.mouse.scaling" = -1.0;
+          CustomSystemPreferences = { com.apple.menuextra.battery.ShowPercent = true; };
+
         };
-        # system.activationScripts.applications.text =
-        #    let
-        #       env = pkgs.buildEnv {
-        #          #name = "system-applications";
-        # paths = config.environment.systemPackages;
-        #  pathsToLink = "/Applications";
-        # };
-        #in
-        #pkgs.lib.mkForce ''
-        # Set up applications.
-        #   echo "setting up /Applications..." >&2
-        #    rm -rf /Applications/Nix\ Apps
-        #     mkdir -p /Applications/Nix\ Apps
-        #      find ${env}/Applications -maxdepth 1 -type l -exec readlink '{}' + |
-        #       while read src; do
-        #app_name=$(basename "$src")
-        # echo "copying $src" >&2
-        #  ${pkgs.mkalias}/bin/mkalias "$src" "/Applications/Nix Apps/$app_name"
-        # done
-        #'';
+
+        fonts.packages = [
+          (pkgs.nerdfonts.override { fonts = [ "Meslo" "JetBrainsMono" ]; })
+        ];
+
+        system.activationScripts.applications.text =
+          let
+            env = pkgs.buildEnv {
+              name = "system-applications";
+              paths = config.environment.systemPackages;
+              pathsToLink = "/Applications";
+            };
+          in
+          pkgs.lib.mkForce ''
+            # Set up applications.
+            echo "setting up /Applications..." >&2
+            rm -rf /Applications/Nix\ Apps
+            mkdir -p /Applications/Nix\ Apps
+            find ${env}/Applications -maxdepth 1 -type l -exec readlink '{}' + |
+            while read src; do
+              app_name=$(basename "$src")
+              echo "copying $src" >&2
+              ${pkgs.mkalias}/bin/mkalias "$src" "/Applications/Nix Apps/$app_name"
+            done
+          '';
 
         # Auto upgrade nix package and the daemon service.
         services.nix-daemon.enable = true;
@@ -149,9 +214,17 @@
           nix-homebrew.darwinModules.nix-homebrew
           {
             nix-homebrew = {
+              # Install Homebrew under the default prefix
               enable = true;
-              user = "tony-andy.oehme";
+
+              # Apple Silicon Only: Also install Homebrew under the default Intel prefix for Rosetta 2
               enableRosetta = true;
+
+              # User owning the Homebrew prefix
+              user = "tony-andy.oehme";
+
+              # Automatically migrate existing Homebrew installations
+              autoMigrate = true;
             };
           }
         ];
@@ -161,3 +234,4 @@
       darwinPackages = self.darwinConfigurations."apple_silicon_mac".pkgs;
     };
 }
+
