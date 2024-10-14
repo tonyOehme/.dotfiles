@@ -28,6 +28,7 @@
             zsh
             zoxide
             vesktop
+            rustup
             eza
             ripgrep
             alacritty
@@ -53,11 +54,8 @@
             "wezterm"
             "iina"
             "keka"
-            "rectangle"
-            # macOS Ventura
-            # "maccy"
-            # macOS Sonoma
-            # "nikitabobko/tap/aerospace"
+            "maccy"
+            "nikitabobko/tap/aerospace"
           ];
           brews = [
             "mas"
