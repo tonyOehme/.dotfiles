@@ -5,6 +5,7 @@ in
 {
   home = {
     packages = with pkgs; [
+      python3
       vim
       yazi
       neovim
