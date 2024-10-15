@@ -1,2 +1,3 @@
 .config/alacritty/themes/**
+.idea/
 **/lazy-lock.json
