@@ -5,7 +5,6 @@ in
 {
   home = {
     packages = with pkgs; [
-
       vim
       yazi
       neovim
@@ -21,7 +20,6 @@ in
       eza
       ripgrep
       docker
-      kitty
       stow
       nodejs_20
     ];
