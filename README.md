@@ -2,6 +2,7 @@
 ## Requirements
 
 install nix
+give terminal full disk access
 ```
 sh <(curl -L https://nixos.org/nix/install)
 ```
