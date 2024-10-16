@@ -54,6 +54,7 @@
             "wezterm"
             "iina"
             "keka"
+            "spotify"
             "maccy"
             "nikitabobko/tap/aerospace"
           ];
@@ -98,11 +99,11 @@
             mru-spaces = false;
           };
 
-          # universalaccess = {
-          #   reduceMotion = true;
-          #   reduceTransparency = true;
-          #   mouseDriverCursorSize = 4.0;
-          # };
+           universalaccess = {
+             reduceMotion = true;
+             reduceTransparency = true;
+             mouseDriverCursorSize = 4.0;
+           };
 
           finder = {
             AppleShowAllExtensions = true;
