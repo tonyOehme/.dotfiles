@@ -8,6 +8,7 @@ in
       python3
       vim
       yazi
+      tree
       neovim
       unzip
       git
