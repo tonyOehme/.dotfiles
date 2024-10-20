@@ -203,8 +203,16 @@
         # $ darwin-rebuild changelog
         system.stateVersion = 5;
 
-        # The platform the configuration will be used on.
+      };
+
+      # The platform the configuration will be used on.
+
+      intel = { pkgs }: {
         nixpkgs.hostPlatform = "x86_64-darwin";
+      };
+
+      apple_silicon = { pkgs }: {
+        nixpkgs.hostPlatform = "aarch64-darwin";
       };
     in
     {
@@ -213,6 +221,7 @@
       darwinConfigurations = {
         "apple_silicon_mac" = nix-darwin.lib.darwinSystem {
           modules = [
+            apple_silicon
             configuration
             nix-homebrew.darwinModules.nix-homebrew
             {
@@ -228,6 +237,7 @@
         "intel_mac" = nix-darwin.lib.darwinSystem {
           modules = [
             configuration
+            intel
             nix-homebrew.darwinModules.nix-homebrew
             {
               nix-homebrew = {
