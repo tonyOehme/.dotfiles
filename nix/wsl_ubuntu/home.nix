@@ -6,6 +6,7 @@ in
   home = {
     packages = with pkgs; [
       vim
+      go
       yazi
       tree
       neovim
