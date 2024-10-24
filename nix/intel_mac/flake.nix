@@ -99,11 +99,11 @@
             mru-spaces = false;
           };
 
-           universalaccess = {
-             reduceMotion = true;
-             reduceTransparency = true;
-             mouseDriverCursorSize = 4.0;
-           };
+          universalaccess = {
+            reduceMotion = true;
+            reduceTransparency = true;
+            mouseDriverCursorSize = 4.0;
+          };
 
           finder = {
             AppleShowAllExtensions = true;
@@ -208,11 +208,11 @@
 
       # The platform the configuration will be used on.
 
-      intel = { pkgs }: {
+      intel = { config, lib, specialArgs, modulesPath, options }: {
         nixpkgs.hostPlatform = "x86_64-darwin";
       };
 
-      apple_silicon = { pkgs }: {
+      apple_silicon = { config, lib, specialArgs, modulesPath, options }: {
         nixpkgs.hostPlatform = "aarch64-darwin";
       };
     in
@@ -220,6 +220,7 @@
       # Build darwin flake using:
       # $ darwin-rebuild build --flake .#simple
       darwinConfigurations = {
+
         "apple_silicon_mac" = nix-darwin.lib.darwinSystem {
           modules = [
             apple_silicon
@@ -235,10 +236,11 @@
             }
           ];
         };
+
         "intel_mac" = nix-darwin.lib.darwinSystem {
           modules = [
-            configuration
             intel
+            configuration
             nix-homebrew.darwinModules.nix-homebrew
             {
               nix-homebrew = {
