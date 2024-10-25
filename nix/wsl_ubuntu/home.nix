@@ -24,6 +24,7 @@ in
       docker
       stow
       nodejs_20
+      tree-sitter
     ];
 
     # This needs to actually be set to your username
