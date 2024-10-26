@@ -60,7 +60,7 @@ xnoremap K :m '<-2<CR>gv=gv
 nnoremap <leader>ps :action FindInPath<CR>
 nnoremap <leader>pf :action GotoFile<CR>
 nnoremap <leader>ls :action ActivateStructureToolWindow<CR>
-noremap <leader>fs :action FileStructurePopup<CR>
+nnoremap <leader>fs :action FileStructurePopup<CR>
 nnoremap <leader>o :action RecentFiles<CR>
 
 " Code completion
