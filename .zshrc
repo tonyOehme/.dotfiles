@@ -136,6 +136,7 @@ alias c='code .'
 alias a='tmux attach'
 alias y='yazi'
 alias gap='git commit -am "automated push"; git push'
+alias b='bat'
 alias gwtp='git pull origin $(git rev-parse --abbrev-ref HEAD)'
 
 
