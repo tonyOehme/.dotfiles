@@ -1,8 +1,0 @@
-[00:24:37 2024-11-01] FETCHING Version 2.38.4
-[00:24:37 2024-11-01] DOWNLOADING https://github.com/spicetify/cli/releases/download/v2.38.4/spicetify-2.38.4-darwin-amd64.tar.gz
-[00:24:39 2024-11-01] EXTRACTING /Users/tony-andy.oehme/.spicetify/spicetify.tar.gz
-[00:24:39 2024-11-01] SETTING EXECUTABLE PERMISSIONS TO /Users/tony-andy.oehme/.spicetify/spicetify
-[00:24:39 2024-11-01] REMOVING /Users/tony-andy.oehme/.spicetify/spicetify.tar.gz
-[00:24:39 2024-11-01] spicetify path already set in /Users/tony-andy.oehme/.zshrc, continuing...
-[00:24:40 2024-11-01] spicetify v2.38.4 was installed successfully to /Users/tony-andy.oehme/.spicetify
-[00:24:40 2024-11-01] Run 'spicetify --help' to get started

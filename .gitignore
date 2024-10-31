@@ -3,4 +3,4 @@
 .config/spicetify/Extracted
 .idea/
 **/lazy-lock.json
-
+*.log
