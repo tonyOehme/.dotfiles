@@ -45,6 +45,7 @@
             "firefox"
             "jetbrains-toolbox"
             "google-chrome"
+            "docker"
             "protonvpn"
             "microsoft-office"
             "microsoft-teams"
@@ -60,6 +61,7 @@
           ];
           brews = [
             "mas"
+            "pnpm"
           ];
           taps = [ ];
           masApps = { };
