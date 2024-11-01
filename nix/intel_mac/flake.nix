@@ -162,11 +162,11 @@
           CustomSystemPreferences = { com.apple.menuextra.battery.ShowPercent = true; };
 
         };
-
+        # fonts
         fonts.packages = [
           (pkgs.nerdfonts.override { fonts = [ "Meslo" "JetBrainsMono" ]; })
         ];
-
+        # copy applications from nix folder to macos /Applications
         system.activationScripts.applications.text =
           let
             env = pkgs.buildEnv {
