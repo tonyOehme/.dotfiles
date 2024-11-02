@@ -1,5 +1,5 @@
 vim.g.netrw_bufsettings = 'noma nomod nu rnu nobl nowrap ro'
-vim.g.editorconfig_enable = true
+vim.g.editorconfig = true
 vim.g.autoformat = true
 vim.opt.guicursor = ""
 vim.opt.cursorline = true

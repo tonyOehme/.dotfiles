@@ -7,6 +7,7 @@ in
     packages = with pkgs; [
       vim
       bat
+      cmake
       go
       yazi
       tree
