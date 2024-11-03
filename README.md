@@ -1,13 +1,19 @@
 # .dotfiles
-## Requirements
+
+
+## windows Installation
+```
+iwr -Uri "https://raw.githubusercontent.com/tonyOehme/.dotfiles/main/windows/windows.ps1" | iex
+```
+
+## mac Installation
+### Requirements
 
 install nix
 give terminal full disk access
 ```
 sh <(curl -L https://nixos.org/nix/install)
 ```
-
-## Installation
 
 on a new machine paste this into terminal
 ```
