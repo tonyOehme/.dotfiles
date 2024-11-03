@@ -1,5 +1,6 @@
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/Library/Application\ Support/Jetbrains/Toolbox/scripts:$PATH
+export PATH=$PATH:/Users/tony-andy.oehme/.spicetify
 export VISUAL="nvim"
 export EDITOR="nvim"
 export GIT_EDITOR="nvim"
