@@ -1,5 +1,8 @@
 .PHONY: nix-install
 nix-install:
+	mkdir studium
+	mkdir personal
+	mkdir work
 	ssh-keygen -t ed25519 -f ~/.ssh/id_personal_github_wslUbuntu
 	sudo apt-get update
 	sudo apt install build-essential
