@@ -15,7 +15,7 @@
         # $ nix-env -qaP | grep wget
         nixpkgs.config.allowUnfree = true;
         environment.shellAlias = {
-          ls = "eza - -icons=always";
+          ls = "eza --icons=always";
           n = "nvim .";
           c = "code .";
           a = "tmux attach";

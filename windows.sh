@@ -1,7 +1,9 @@
-# need to install browser(s), peazip, code editors, discord with vencord, powertoys, windows terminal and everything else you might need
 irm christitus.com/win | iex
-wsl --install -d [ your favorite linux flavor ]
-choco install GlazeWM
-choco install zebar
+git clone https://github.com/tonyOehme/.dotfiles $HOME\.dotfiles
+# font
+choco install nerd-fonts-jetbrainsmono
+setx GLAZEWM_CONFIG_PATH "$HOME\.dotfiles\.glzr\glazewm\config.yaml"
 # you need spicetify
-git clone https://github.com/tonyOehme/.glzr.git ~/.glzr
+iwr -useb https://raw.githubusercontent.com/spicetify/cli/main/install.ps1 | iex
+# wsl
+wsl --install -d Ubuntu
