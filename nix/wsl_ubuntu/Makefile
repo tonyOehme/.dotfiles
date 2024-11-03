@@ -1,5 +1,6 @@
 .PHONY: nix-install
 nix-install:
+	ssh-keygen -t ed25519 -f ~/.ssh/id_personal_github_wslUbuntu
 	sudo apt-get update
 	sudo apt install build-essential
 	sh <(curl -L https://nixos.org/nix/install) --daemon
