@@ -33,7 +33,6 @@ return {
                 "emmet_ls",
                 "tailwindcss",
                 "lua_ls",
-                "powershell_es",
                 "ts_ls",
                 "yamlls",
                 "pylsp",
