@@ -36,6 +36,7 @@ return {
                 "ts_ls",
                 "yamlls",
                 "pylsp",
+                "jsonls",
                 "rnix",
             },
             handlers = {
