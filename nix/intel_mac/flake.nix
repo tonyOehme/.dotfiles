@@ -14,6 +14,22 @@
         # List packages installed in system profile. To search by name, run:
         # $ nix-env -qaP | grep wget
         nixpkgs.config.allowUnfree = true;
+        environment.shellAlias = {
+          ls = "eza - -icons=always";
+          n = "nvim .";
+          c = "code .";
+          a = "tmux attach";
+          y = "yazi";
+          gap = "git commit -am \"automated push\"; git push' alias b = \"bat\"";
+          gwtp = "git pull origin $(git rev-parse --abbrev-ref HEAD)";
+
+        };
+        environment.variables = {
+          VISUAL = "nvim";
+          EDITOR = "nvim";
+          GIT_EDITOR = "nvim";
+          NVM_DIR = "$HOME/.nvm";
+        };
         environment.systemPackages = with pkgs;
           [
             vim
