@@ -10,51 +10,7 @@
 
   outputs = inputs@{ self, nix-homebrew, nix-darwin, nixpkgs }:
     let
-      configuration = { pkgs, config, ... }: {
-        # List packages installed in system profile. To search by name, run:
-        # $ nix-env -qaP | grep wget
-        nixpkgs.config.allowUnfree = true;
-        environment.shellAliases = {
-          ls = "eza --icons=always";
-          n = "nvim .";
-          c = "code .";
-          a = "tmux attach";
-          y = "yazi";
-          gap = "git commit -am \"automated push\"; git push' alias b = \"bat\"";
-          gwtp = "git pull origin $(git rev-parse --abbrev-ref HEAD)";
-
-        };
-        environment.variables = {
-          VISUAL = "nvim";
-          EDITOR = "nvim";
-          GIT_EDITOR = "nvim";
-          NVM_DIR = "$HOME/.nvm";
-        };
-        environment.systemPackages = with pkgs;
-          [
-            vim
-            yazi
-            mkalias
-            neovim
-            git
-            tmux
-            tldr
-            thefuck
-            fzf
-            zsh
-            zoxide
-            vesktop
-            rustup
-            eza
-            ripgrep
-            alacritty
-            docker
-            kitty
-            vscode
-            stow
-            nodejs_20
-          ];
-
+      mac = { pkgs, config, ... }: {
         homebrew = {
           enable = true;
           casks = [
@@ -84,11 +40,6 @@
           onActivation.cleanup = "zap";
           onActivation.autoUpdate = true;
           onActivation.upgrade = true;
-        };
-
-        system.keyboard = {
-          enableKeyMapping = true;
-          swapLeftCtrlAndFn = true;
         };
 
         system.defaults = {
@@ -178,10 +129,6 @@
           CustomSystemPreferences = { com.apple.menuextra.battery.ShowPercent = true; };
 
         };
-        # fonts
-        fonts.packages = [
-          (pkgs.nerdfonts.override { fonts = [ "Meslo" "JetBrainsMono" ]; })
-        ];
         # copy applications from nix folder to macos /Applications
         system.activationScripts.applications.text =
           let
@@ -204,6 +151,94 @@
             done
           '';
 
+        system.keyboard = {
+          enableKeyMapping = true;
+          swapLeftCtrlAndFn = true;
+        };
+
+
+      };
+      configuration = { pkgs, config, system, ... }: {
+        # List packages installed in system profile. To search by name, run:
+        # $ nix-env -qaP | grep wget
+        nixpkgs.config.allowUnfree = true;
+        environment.shellAliases = {
+          ls = "eza --icons=always";
+          n = "nvim .";
+          c = "code .";
+          a = "tmux attach";
+          y = "yazi";
+          gap = "git commit -am \"automated push\"; git push' alias b = \"bat\"";
+          gwtp = "git pull origin $(git rev-parse --abbrev-ref HEAD)";
+
+        };
+        environment.variables = {
+          VISUAL = "nvim";
+          EDITOR = "nvim";
+          GIT_EDITOR = "nvim";
+          NVM_DIR = "$HOME/.nvm";
+        };
+        environment.systemPackages = with pkgs;
+          [
+            vim
+            yazi
+            mkalias
+            neovim
+            git
+            tmux
+            tldr
+            thefuck
+            fzf
+            zsh
+            zoxide
+            vesktop
+            rustup
+            eza
+            ripgrep
+            alacritty
+            docker
+            kitty
+            vscode
+            stow
+            nodejs_20
+          ];
+
+        homebrew = {
+          enable = true;
+          casks = [
+            "firefox"
+            "jetbrains-toolbox"
+            "google-chrome"
+            "docker"
+            "protonvpn"
+            "microsoft-office"
+            "microsoft-teams"
+            "alfred"
+            "shottr"
+            "zen-browser"
+            "wezterm"
+            "iina"
+            "keka"
+            "spotify"
+            "maccy"
+            "nikitabobko/tap/aerospace"
+          ];
+          brews = [
+            "mas"
+            "pnpm"
+          ];
+          taps = [ ];
+          masApps = { };
+          onActivation.cleanup = "zap";
+          onActivation.autoUpdate = true;
+          onActivation.upgrade = true;
+        };
+
+        # fonts
+        fonts.packages = [
+          (pkgs.nerdfonts.override { fonts = [ "Meslo" "JetBrainsMono" ]; })
+        ];
+
         # Auto upgrade nix package and the daemon service.
         services.nix-daemon.enable = true;
         # nix.package = pkgs.nix;
@@ -221,20 +256,17 @@
         # Used for backwards compatibility, please read the changelog before changing.
         # $ darwin-rebuild changelog
         system.stateVersion = 5;
+        nixpkgs.hostPlatform = system;
 
       };
 
       # The platform the configuration will be used on.
 
-      intel = { config, lib, specialArgs, modulesPath, options }: {
-        nixpkgs.hostPlatform = "x86_64-darwin";
-      };
 
-      apple_silicon = { config, lib, specialArgs, modulesPath, options }: {
-        nixpkgs.hostPlatform = "aarch64-darwin";
-      };
       user = "tony-andy.oehme";
       systems = [ "x86_64-darwin" "aarch64-darwin" ];
+      system = "x86_64-darwin";
+            hosts = [];
     in
     {
       # Build darwin flake using:
@@ -242,10 +274,15 @@
       darwinConfigurations = {
 
 
-        "apple_silicon_mac" = nix-darwin.lib.darwinSystem {
+        "aarch64-darwin" = nix-darwin.lib.darwinSystem {
           modules = [
-            apple_silicon
+            mac
             configuration
+            {
+              _module.args = {
+                inherit system;
+              };
+            }
             nix-homebrew.darwinModules.nix-homebrew
             {
               nix-homebrew = {
@@ -258,10 +295,10 @@
           ];
         };
 
-        "intel_mac" = nix-darwin.lib.darwinSystem {
+        "x86_64-darwin" = nix-darwin.lib.darwinSystem {
           modules = [
-            intel
-            configuration
+            mac
+            configuration { _module.args = { inherit system; }; }
             nix-homebrew.darwinModules.nix-homebrew
             {
               nix-homebrew = {
@@ -276,8 +313,8 @@
 
       # Expose the package set, including overlays, for convenience.
       darwinPackages = [
-        self.darwinConfigurations."intel_mac".pkgs
-        self.darwinConfigurations."apple_silicon_mac".pkgs
+        self.darwinConfigurations."x86_64-darwin".pkgs
+        self.darwinConfigurations."aarch64-darwin".pkgs
       ];
     };
 }
