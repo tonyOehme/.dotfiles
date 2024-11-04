@@ -9,7 +9,7 @@
 	excludesfile = ~/.gitignore_global
     whitespace = -trailing-space
 [pull]
-    ff = only
+    rebase = true
 [diff]
     algorithm = histogram
     renames = true
