@@ -239,7 +239,7 @@ keybindings:
   # Launch CMD Terminal. Alternatively, use `shell-exec wt` or
   # `shell-exec %ProgramFiles%/Git/git-bash.exe` to start Windows
   # Terminal and Git Bash respectively.
-  - commands: ["shell-exec cmd"]
+  - commands: ["shell-exec C:\\WINDOWS\\system32\\wsl.exe -d Ubuntu-24.04"]
     bindings: ["alt+enter"]
 
   # Focus the next/previous workspace defined in `workspaces` config.
