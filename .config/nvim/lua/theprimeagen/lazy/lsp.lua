@@ -28,15 +28,20 @@ return {
             automatic_installation = true,
             ensure_installed = {
                 "bashls",
+                -- c/c++
                 "clangd",
+                "cmake",
+                -- web
                 "dockerls",
                 "emmet_ls",
                 "tailwindcss",
-                "lua_ls",
                 "ts_ls",
                 "yamlls",
-                "pylsp",
                 "jsonls",
+                "lua_ls",
+                "pylsp",
+                -- nix
+                "rnix",
                 "nil_ls",
             },
             handlers = {
