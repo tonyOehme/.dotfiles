@@ -14,7 +14,7 @@
         # List packages installed in system profile. To search by name, run:
         # $ nix-env -qaP | grep wget
         nixpkgs.config.allowUnfree = true;
-        environment.shellAlias = {
+        environment.shellAliases = {
           ls = "eza --icons=always";
           n = "nvim .";
           c = "code .";
