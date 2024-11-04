@@ -203,37 +203,6 @@
             nodejs_20
           ];
 
-        homebrew = {
-          enable = true;
-          casks = [
-            "firefox"
-            "jetbrains-toolbox"
-            "google-chrome"
-            "docker"
-            "protonvpn"
-            "microsoft-office"
-            "microsoft-teams"
-            "alfred"
-            "shottr"
-            "zen-browser"
-            "wezterm"
-            "iina"
-            "keka"
-            "spotify"
-            "maccy"
-            "nikitabobko/tap/aerospace"
-          ];
-          brews = [
-            "mas"
-            "pnpm"
-          ];
-          taps = [ ];
-          masApps = { };
-          onActivation.cleanup = "zap";
-          onActivation.autoUpdate = true;
-          onActivation.upgrade = true;
-        };
-
         # fonts
         fonts.packages = [
           (pkgs.nerdfonts.override { fonts = [ "Meslo" "JetBrainsMono" ]; })
@@ -241,7 +210,7 @@
 
         # Auto upgrade nix package and the daemon service.
         services.nix-daemon.enable = true;
-        # nix.package = pkgs.nix;
+        nix.package = pkgs.nix;
 
         # Necessary for using flakes on this system.
         nix.settings.experimental-features = "nix-command flakes";
@@ -264,10 +233,7 @@
 
 
       user = "tony-andy.oehme";
-      systems = [ "x86_64-darwin" "aarch64-darwin" ];
-      system = "x86_64-darwin";
-      hosts = [ ];
-      users = [
+      platforms = [
         {
           name = "x86_64-darwin";
           nix-homebrew = {
@@ -305,9 +271,9 @@
             };
 
         })
-        users);
+        platforms);
 
       # Expose the package set, including overlays, for convenience.
-        darwinPackages = map (user: self.darwinConfigurations.user.name.pkgs) users;
+      darwinPackages = map (platform: self.darwinConfigurations.user.name.pkgs) platforms;
     };
 }
