@@ -1,9 +1,0 @@
-[2m2024-10-08T20:53:13.798631Z[0m [31mERROR[0m [2mglazewm::common::commands::shell_exec[0m[2m:[0m [3merr_message[0m[2m=[0m"Failed to execute 'zebar'.\n\nError: The operation was canceled by the user. (0x800704C7)"
-[2m2024-10-08T21:44:19.026456Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Another instance of the application is already running.
-[2m2024-10-08T21:48:21.980600Z[0m [31mERROR[0m [2mglazewm::common::commands::shell_exec[0m[2m:[0m [3merr_message[0m[2m=[0m"Failed to execute 'zebar'.\n\nError: The operation was canceled by the user. (0x800704C7)"
-[2m2024-10-08T21:48:33.145827Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Workspace with name '2' doesn't exist or is already active.
-[2m2024-10-08T21:54:23.408387Z[0m [31mERROR[0m [2mglazewm::common::commands::shell_exec[0m[2m:[0m [3merr_message[0m[2m=[0m"Failed to execute 'zebar'.\n\nError: The operation was canceled by the user. (0x800704C7)"
-[2m2024-10-08T21:55:16.861651Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Another instance of the application is already running.
-[2m2024-10-09T09:10:27.868161Z[0m [31mERROR[0m [2mglazewm::common::commands::shell_exec[0m[2m:[0m [3merr_message[0m[2m=[0m"Failed to execute 'zebar'.\n\nError: The operation was canceled by the user. (0x800704C7)"
-[2m2024-10-09T09:37:00.547837Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m window_rules[0].commands: unexpected argument found
- at line 115 column 15

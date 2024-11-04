@@ -233,11 +233,14 @@
       apple_silicon = { config, lib, specialArgs, modulesPath, options }: {
         nixpkgs.hostPlatform = "aarch64-darwin";
       };
+      user = "tony-andy.oehme";
+      systems = [ "x86_64-darwin" "aarch64-darwin" ];
     in
     {
       # Build darwin flake using:
       # $ darwin-rebuild build --flake .#simple
       darwinConfigurations = {
+
 
         "apple_silicon_mac" = nix-darwin.lib.darwinSystem {
           modules = [
@@ -249,7 +252,7 @@
                 # Install Homebrew under the default prefix
                 enable = true;
                 enableRoseta = true;
-                user = "tony-andy.oehme";
+                inherit user;
               };
             }
           ];
@@ -264,7 +267,7 @@
               nix-homebrew = {
                 # Install Homebrew under the default prefix
                 enable = true;
-                user = "tony-andy.oehme";
+                inherit user;
               };
             }
           ];
