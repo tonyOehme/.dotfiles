@@ -298,7 +298,7 @@
               modules = [
                 mac
                 configuration
-                { _module.args = { system = user.system; }; }
+                { _module.args = { system = user.name; }; }
                 nix-homebrew.darwinModules.nix-homebrew
                 { nix-homebrew = user.nix-homebrew; }
               ];
@@ -308,9 +308,6 @@
         users);
 
       # Expose the package set, including overlays, for convenience.
-      darwinPackages = [
-        self.darwinConfigurations."x86_64-darwin".pkgs
-        self.darwinConfigurations."aarch64-darwin".pkgs
-      ];
+        darwinPackages = map (user: self.darwinConfigurations.user.name.pkgs) users;
     };
 }
