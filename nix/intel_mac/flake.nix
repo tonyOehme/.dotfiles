@@ -266,50 +266,46 @@
       user = "tony-andy.oehme";
       systems = [ "x86_64-darwin" "aarch64-darwin" ];
       system = "x86_64-darwin";
-            hosts = [];
+      hosts = [ ];
+      users = [
+        {
+          name = "x86_64-darwin";
+          nix-homebrew = {
+            # Install Homebrew under the default prefix
+            enable = true;
+            inherit user;
+          };
+        }
+        {
+          name = "aarch64-darwin";
+          nix-homebrew = {
+            # Install Homebrew under the default prefix
+            enable = true;
+            enableRoseta = true;
+            inherit user;
+          };
+        }
+      ];
     in
     {
       # Build darwin flake using:
       # $ darwin-rebuild build --flake .#simple
-      darwinConfigurations = {
-
-
-        "aarch64-darwin" = nix-darwin.lib.darwinSystem {
-          modules = [
-            mac
-            configuration
+      darwinConfigurations = builtins.listToAttrs (map
+        (user: {
+          name = user.name;
+          value = nix-darwin.lib.darwinSystem
             {
-              _module.args = {
-                inherit system;
-              };
-            }
-            nix-homebrew.darwinModules.nix-homebrew
-            {
-              nix-homebrew = {
-                # Install Homebrew under the default prefix
-                enable = true;
-                enableRoseta = true;
-                inherit user;
-              };
-            }
-          ];
-        };
+              modules = [
+                mac
+                configuration
+                { _module.args = { system = user.system; }; }
+                nix-homebrew.darwinModules.nix-homebrew
+                { nix-homebrew = user.nix-homebrew; }
+              ];
+            };
 
-        "x86_64-darwin" = nix-darwin.lib.darwinSystem {
-          modules = [
-            mac
-            configuration { _module.args = { inherit system; }; }
-            nix-homebrew.darwinModules.nix-homebrew
-            {
-              nix-homebrew = {
-                # Install Homebrew under the default prefix
-                enable = true;
-                inherit user;
-              };
-            }
-          ];
-        };
-      };
+        })
+        users);
 
       # Expose the package set, including overlays, for convenience.
       darwinPackages = [
