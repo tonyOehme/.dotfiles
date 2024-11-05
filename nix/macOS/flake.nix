@@ -144,10 +144,9 @@
           in
           # setup battery percentage cuz i cant find it in nix darwin docs
           pkgs.lib.mkForce ''
-            # Set up applications.
-            _user=`who | grep console | awk '{ print $1 }'`
+            echo "enabling battery percentage in menu bar"
+            defaults write ~/Library/Preferences/ByHost/com.apple.controlcenter.plist BatteryShowPercentage -bool true
 
-            sudo -u $_user defaults write /Users/$_user/Library/Preferences/ByHost/com.apple.controlcenter.plist BatteryShowPercentage -bool true
             echo "setting up /Applications..." >&2
             rm -rf /Applications/Nix\ Apps
             mkdir -p /Applications/Nix\ Apps
@@ -252,11 +251,11 @@
         "x86_64-darwin"
         "aarch64-darwin"
       ];
-
-      outputs = builtins.concatMap
-        (system:
-          let mapper = map (user: "${system}/${user}") users; in mapper)
-        systems;
+      # this seems unnecessary now
+      # outputs = builtins.concatMap
+      #   (system:
+      #     let mapper = map (user: "${system}/${user}") users; in mapper)
+      #   systems;
 
     in
     {
@@ -288,7 +287,13 @@
         systems);
 
       # Expose the package set, including overlays, for convenience.
-      darwinPackages = map (output: self.darwinConfigurations.${output}.pkgs) outputs;
+      darwinPackages = builtins.concatLists
+        (system:
+          let mapper = map
+            (user:
+              self.darwinConfigurations."${system}/${user}".pkgs)
+            users; in mapper)
+        systems;
     };
 }
 
