@@ -233,6 +233,7 @@
 
 
       user = "tony-andy.oehme";
+      users = [ "tony-andy.oehme" ];
       platforms = [
         {
           name = "x86_64-darwin";
@@ -252,21 +253,37 @@
           };
         }
       ];
+      combinations = map
+        (platform:
+          let platform = platform; in
+          map
+            (
+              user: {
+                name = platform.name + "+" + user;
+
+                nix-homebrew =
+                  if platform.name == "aarch64-darwin"
+                  then { enableRoseta = true; inherit user; enable = true; }
+                  else { inherit user; enable = true; };
+              }
+            )
+            users)
+        platforms;
     in
     {
       # Build darwin flake using:
       # $ darwin-rebuild build --flake .#simple
       darwinConfigurations = builtins.listToAttrs (map
-        (user: {
-          name = user.name;
+        (platform: {
+          name = platform.name;
           value = nix-darwin.lib.darwinSystem
             {
               modules = [
                 mac
                 configuration
-                { _module.args = { system = user.name; }; }
+                { _module.args = { system = platform.name; }; }
                 nix-homebrew.darwinModules.nix-homebrew
-                { nix-homebrew = user.nix-homebrew; }
+                { nix-homebrew = platform.nix-homebrew; }
               ];
             };
 
@@ -274,6 +291,6 @@
         platforms);
 
       # Expose the package set, including overlays, for convenience.
-      darwinPackages = map (platform: self.darwinConfigurations.user.name.pkgs) platforms;
+      darwinPackages = map (platform: self.darwinConfigurations.platform.name.pkgs) platforms;
     };
 }
