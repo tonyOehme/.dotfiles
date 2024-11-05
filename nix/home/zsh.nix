@@ -8,7 +8,7 @@
     c = "code .";
     a = "tmux attach";
     y = "yazi .";
-    gap = "git commit -am 'automated push'; git push";
+    gap = "git commit --all --message 'automated push'; git push";
     b = "bat";
     gwtp = "git pull origin $(git rev-parse --abbrev-ref HEAD)";
 
