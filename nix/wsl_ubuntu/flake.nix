@@ -24,7 +24,10 @@
                 name = "${system}/${user}";
                 value = home-manager.lib.homeManagerConfiguration {
                   pkgs = import nixpkgs { inherit system; };
-                  modules = [ ./home.nix ];
+                  modules = [
+                    ./home.nix
+                    { _module.args = { username = user; }; }
+                  ];
                 };
               })
             users; in mapper)
