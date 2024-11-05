@@ -10,7 +10,7 @@
 
   outputs = inputs@{ self, nix-homebrew, nix-darwin, nixpkgs }:
     let
-      mac = { pkgs, config, ... }: {
+      mac_setup = { pkgs, config, ... }: {
         homebrew = {
           enable = true;
           casks = [
@@ -269,7 +269,7 @@
               value = nix-darwin.lib.darwinSystem
                 {
                   modules = [
-                    mac
+                    mac_setup
                     configuration
                     { _module.args = { inherit system; }; }
                     nix-homebrew.darwinModules.nix-homebrew
