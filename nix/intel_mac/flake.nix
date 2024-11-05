@@ -253,21 +253,21 @@
           };
         }
       ];
-      combinations = map
+      combinations = builtins.concatMap
         (platform:
-          let platform = platform; in
-          map
-            (
-              user: {
-                name = platform.name + "+" + user;
+          let platformCombinations =
+            map
+              (
+                user: {
+                  name = platform.name + "+" + user;
 
-                nix-homebrew =
-                  if platform.name == "aarch64-darwin"
-                  then { enableRoseta = true; inherit user; enable = true; }
-                  else { inherit user; enable = true; };
-              }
-            )
-            users)
+                  nix-homebrew =
+                    if platform.name == "aarch64-darwin"
+                    then { enableRoseta = true; inherit user; enable = true; }
+                    else { inherit user; enable = true; };
+                }
+              )
+              users; in platformCombinations)
         platforms;
     in
     {
