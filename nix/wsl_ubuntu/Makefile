@@ -1,6 +1,8 @@
 ARCHITECTURE = $(shell uname --processor)
 USERNAME = $(shell uname --nodename)
 KERNELNAME = $(shell uname --kernel-name | tr '[:upper:]' '[:lower:]')
+DOTFILESDIRECTORY = ~/personal/.dotfiles
+FLAKE = $(DOTFILESDIRECTORY)/nix/wsl_ubuntu#$(ARCHITECTURE)-$(KERNELNAME)/$(USERNAME)
 
 
 .PHONY: nix-install
@@ -15,12 +17,12 @@ nix-install:
 
 .PHONY: install-config
 install-config:
-	nix-shell -p git --run 'git clone https://github.com/tonyOehme/.dotfiles.git ~/personal/.dotfiles'
+	nix-shell -p git --run 'git clone https://github.com/tonyOehme/.dotfiles.git $(DOTFILESDIRECTORY)'
 	nix-channel --add https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz home-manager
 	nix-channel --update
 	nix-shell '<home-manager>' -A install
-	home-manager switch --extra-experimental-features 'nix-command flakes' --flake ~/personal/.dotfiles/nix/wsl_ubuntu#$(ARCHITECTURE)-$(KERNELNAME)/$(USERNAME)
-	cd ~/personal/.dotfiles
+	home-manager switch --extra-experimental-features 'nix-command flakes' --flake $(FLAKE)
+	cd $(DOTFILESDIRECTORY)
 	git submodule update --init --recursive
 	stow --target=$HOME .
 	rustup default stable
@@ -30,7 +32,7 @@ update-config:
 	nix-channel --add https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz home-manager
 	nix-channel --update
 	nix-shell '<home-manager>' -A install
-	home-manager switch --extra-experimental-features 'nix-command flakes' --flake ~/personal/.dotfiles/nix/wsl_ubuntu#$(ARCHITECTURE)-$(KERNELNAME)/$(USERNAME)
+	home-manager switch --extra-experimental-features 'nix-command flakes' --flake $(FLAKE)
 
 .PHONY: clean
 clean:
