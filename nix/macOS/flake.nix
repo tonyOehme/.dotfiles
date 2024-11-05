@@ -243,7 +243,6 @@
 
       users = [
         "kia"
-        "tony-andy.oehme"
         "tonyandyoehme"
         "tonyyep"
       ];
