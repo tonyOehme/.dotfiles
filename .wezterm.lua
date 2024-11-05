@@ -8,7 +8,7 @@ local config = wezterm.config_builder()
 
 -- my coolnight colorscheme
 
-config.font = wezterm.font("JetBrainsMonoNL Nerd Font Propo")
+config.font = wezterm.font("JetBrainsMonoNL Nerd Font Propo", { weight = "Medium", italic = false })
 config.color_scheme = "OneDark (base16)"
 config.font_size = 19
 config.window_padding = {
