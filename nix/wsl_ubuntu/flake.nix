@@ -25,7 +25,7 @@
                 value = home-manager.lib.homeManagerConfiguration {
                   pkgs = import nixpkgs { inherit system; };
                   modules = [
-                    ./home.nix
+                    ../home/home.nix
                     { _module.args = { username = user; }; }
                   ];
                 };
