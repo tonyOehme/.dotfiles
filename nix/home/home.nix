@@ -1,10 +1,10 @@
 { lib, pkgs, config, username, ... }:
 {
   programs = {
-    #tmux = import ../home/tmux.nix { inherit pkgs; };
+    tmux = import ./tmux.nix { inherit pkgs; };
     zsh = import ./zsh.nix { inherit config pkgs lib; };
-    #zoxide = import ../home/zoxide.nix { inherit config pkgs; };
-    #fzf = import ../home/fzf.nix { inherit pkgs; };
+    zoxide = import ./zoxide.nix { inherit config pkgs; };
+    fzf = import ./fzf.nix { inherit pkgs; };
   };
   home = {
     packages = with pkgs; [
