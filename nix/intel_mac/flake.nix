@@ -253,22 +253,7 @@
           };
         }
       ];
-      combinations = builtins.concatMap
-        (platform:
-          let platformCombinations =
-            map
-              (
-                user: {
-                  name = platform.name + "+" + user;
 
-                  nix-homebrew =
-                    if platform.name == "aarch64-darwin"
-                    then { enableRoseta = true; inherit user; enable = true; }
-                    else { inherit user; enable = true; };
-                }
-              )
-              users; in platformCombinations)
-        platforms;
     in
     {
       # Build darwin flake using:
