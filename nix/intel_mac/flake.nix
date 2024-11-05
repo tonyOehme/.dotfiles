@@ -105,6 +105,7 @@
             AppleTemperatureUnit = "Celsius";
             AppleFontSmoothing = 1;
             AppleShowScrollBars = "Always";
+            AppleScrollerPagingBehavior = true;
             AppleMeasurementUnits = "Centimeters";
             AppleShowAllExtensions = true;
             NSAutomaticSpellingCorrectionEnabled = false;
@@ -211,7 +212,9 @@
 
         # fonts
         fonts.packages = [
+          # nerd fonts
           (pkgs.nerdfonts.override { fonts = [ "Meslo" "JetBrainsMono" ]; })
+          # regular ass fonts
         ];
 
         # Auto upgrade nix package and the daemon service.
@@ -239,6 +242,7 @@
 
 
       users = [
+        "kia"
         "tony-andy.oehme"
         "tonyandyoehme"
         "tonyyep"
