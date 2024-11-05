@@ -15,6 +15,7 @@
           enable = true;
           casks = [
             "firefox"
+            "betterdisplay"
             "jetbrains-toolbox"
             "google-chrome"
             "docker"
