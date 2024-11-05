@@ -12,18 +12,22 @@
 
   outputs = { nixpkgs, home-manager, ... }:
     let
-      lib = nixpkgs.lib;
-      system = "x86_64-linux";
-      pkgs = import nixpkgs { inherit system; };
+      systems = [ "x86_64-linux" "aarch64-linux" ];
+      users = [ "tonyyep" ];
     in
     {
-      homeConfigurations = {
-        myprofile = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = [
-            ./home.nix
-          ];
-        };
-      };
+      homeConfigurations = builtins.listToAttrs (builtins.concatMap
+        (system:
+          let mapper = map
+            (user:
+              {
+                name = "${system}/${user}";
+                value = home-manager.lib.homeManagerConfiguration {
+                  pkgs = import nixpkgs { inherit system; };
+                  modules = [ ./home.nix ];
+                };
+              })
+            users; in mapper)
+        systems);
     };
 }
