@@ -52,7 +52,6 @@
               "/Applications/Spotify.app"
               "/Applications/Nix\ Apps/Visual\ Studio\ Code.app"
               "/Applications/Nix\ Apps/Vesktop.app"
-
             ];
             orientation = "bottom";
             autohide = true;
@@ -141,6 +140,7 @@
               pathsToLink = "/Applications";
             };
           in
+          # setup battery percentage cuz i cant find it in nix darwin docs
           pkgs.lib.mkForce ''
             # Set up applications.
             _user=`who | grep console | awk '{ print $1 }'`
@@ -238,7 +238,11 @@
       # The platform the configuration will be used on.
 
 
-      users = [ "tonyandyoehme" "tonyyep" ];
+      users = [
+        "tony-andy.oehme"
+        "tonyandyoehme"
+        "tonyyep"
+      ];
       systems = [
         "x86_64-darwin"
         "aarch64-darwin"
