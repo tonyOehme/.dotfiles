@@ -50,7 +50,9 @@
               "/Applications/WezTerm.app"
               "/Applications/Google\ Chrome.app"
               "/Applications/Spotify.app"
-              "/Applications/Microsoft\ Teams.app"
+              "/Applications/Nix\ Apps/Visual\ Studio\ Code.app"
+              "/Applications/Nix\ Apps/Vesktop.app"
+
             ];
             orientation = "bottom";
             autohide = true;
@@ -76,6 +78,7 @@
 
           finder = {
             AppleShowAllExtensions = true;
+            FXDefaultSearchScope = "SCcf";
             AppleShowAllFiles = true;
             _FXSortFoldersFirst = true;
             QuitMenuItem = true;
@@ -126,7 +129,7 @@
           };
 
           ".GlobalPreferences"."com.apple.mouse.scaling" = -1.0;
-          CustomSystemPreferences = { com.apple.menuextra.battery.ShowPercent = true; };
+          CustomSystemPreferences = { };
 
         };
         # copy applications from nix folder to macos /Applications
@@ -140,6 +143,9 @@
           in
           pkgs.lib.mkForce ''
             # Set up applications.
+            _user=`who | grep console | awk '{ print $1 }'`
+
+            sudo -u $_user defaults write /Users/$_user/Library/Preferences/ByHost/com.apple.controlcenter.plist BatteryShowPercentage -bool true
             echo "setting up /Applications..." >&2
             rm -rf /Applications/Nix\ Apps
             mkdir -p /Applications/Nix\ Apps
@@ -232,50 +238,48 @@
       # The platform the configuration will be used on.
 
 
-      user = "tony-andy.oehme";
-      users = [ "tony-andy.oehme" ];
-      platforms = [
-        {
-          name = "x86_64-darwin";
-          nix-homebrew = {
-            # Install Homebrew under the default prefix
-            enable = true;
-            inherit user;
-          };
-        }
-        {
-          name = "aarch64-darwin";
-          nix-homebrew = {
-            # Install Homebrew under the default prefix
-            enable = true;
-            enableRoseta = true;
-            inherit user;
-          };
-        }
+      users = [ "tonyandyoehme" "tonyyep" ];
+      systems = [
+        "x86_64-darwin"
+        "aarch64-darwin"
       ];
+
+      outputs = builtins.concatMap
+        (system:
+          let mapper = map (user: "${system}/${user}") users; in mapper)
+        systems;
 
     in
     {
       # Build darwin flake using:
       # $ darwin-rebuild build --flake .#simple
-      darwinConfigurations = builtins.listToAttrs (map
-        (platform: {
-          name = platform.name;
-          value = nix-darwin.lib.darwinSystem
-            {
-              modules = [
-                mac
-                configuration
-                { _module.args = { system = platform.name; }; }
-                nix-homebrew.darwinModules.nix-homebrew
-                { nix-homebrew = platform.nix-homebrew; }
-              ];
-            };
+      darwinConfigurations = builtins.listToAttrs (builtins.concatMap
+        (system:
+          let platformConfiguration = map
+            (user: {
+              name = "${system}/${user}";
+              value = nix-darwin.lib.darwinSystem
+                {
+                  modules = [
+                    mac
+                    configuration
+                    { _module.args = { inherit system; }; }
+                    nix-homebrew.darwinModules.nix-homebrew
+                    {
+                      nix-homebrew =
+                        if system == "aarch64-darwin"
+                        then { inherit user; enable = true; enableRosetta = true; }
+                        else { inherit user; enable = true; };
+                    }
+                  ];
+                };
 
-        })
-        platforms);
+            })
+            users; in platformConfiguration)
+        systems);
 
       # Expose the package set, including overlays, for convenience.
-      darwinPackages = map (platform: self.darwinConfigurations.platform.name.pkgs) platforms;
+      darwinPackages = map (output: self.darwinConfigurations.${output}.pkgs) outputs;
     };
 }
+
