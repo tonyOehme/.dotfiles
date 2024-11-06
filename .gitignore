@@ -1,6 +1,5 @@
 .config/alacritty/themes/**
-.config/spicetify/config-xpui.ini
-.config/spicetify/Extracted
+.config/spicetify/
 .idea/
 **/lazy-lock.json
 *.log

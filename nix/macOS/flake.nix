@@ -23,15 +23,19 @@
         homebrew = {
           enable = true;
           casks = [
+            #nix repo version does not work
             "jetbrains-toolbox"
             "firefox"
-            "betterdisplay"
+            "wezterm"
+            #needs to be here because of spicetify
+            "spotify"
+            #maconly apps
             "docker"
             "protonvpn"
             "microsoft-office"
             "microsoft-teams"
-            "wezterm"
             "alfred"
+            "betterdisplay"
             "shottr"
             "zen-browser"
             "iina"
@@ -200,7 +204,6 @@
             fzf
             zsh
             zoxide
-            spicetify-cli
             rustup
             eza
             ripgrep
@@ -213,7 +216,6 @@
             google-chrome
             alacritty
             vscode
-            spotify
           ];
 
         # fonts
@@ -285,13 +287,6 @@
                         if system == "aarch64-darwin"
                         then { inherit user; enable = true; enableRosetta = true; }
                         else { inherit user; enable = true; };
-                    }
-
-                    home-manager.darwinModules.home-manager
-                    {
-                      home-manager.useGlobalPkgs = true;
-                      home-manager.useUserPackages = true;
-                      home-manager.users.tonyyep = import ./home.nix;
                     }
 
                   ];
