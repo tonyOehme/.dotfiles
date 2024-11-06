@@ -2,7 +2,7 @@
 {
   enable = true;
   lfs.enable = true;
-  userName = "Tony Andy Oehme";
+  userName = "Andy Wand";
   userEmail = "tony-andy.oehme@tum.de";
 
   # signing = {

@@ -10,6 +10,7 @@
     whitespace = -trailing-space
 [pull]
     rebase = true
+    ff = only
 [diff]
     algorithm = histogram
     renames = true
@@ -39,8 +40,8 @@
 [submodule]
     recurse = true
 [transfer]
-    fsckobjects = true
+    fsckObjects = true
 [fetch]
-    fsckobjects = true
+    fsckObjects = true
 [receive]
     fsckObjects = true
