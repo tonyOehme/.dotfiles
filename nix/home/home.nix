@@ -1,11 +1,15 @@
 { lib, pkgs, config, username, ... }:
+let inherit (config.lib.file) mkOutOfStoreSymlink; in
 {
   programs = {
-    #tmux = import ./tmux.nix { inherit pkgs; };
+
+    tmux = import ./tmux.nix { inherit pkgs; };
     zsh = import ./zsh.nix { inherit config pkgs lib; };
-    #zoxide = import ./zoxide.nix { inherit config pkgs; };
-    #fzf = import ./fzf.nix { inherit pkgs; };
+    zoxide = import ./zoxide.nix { inherit config pkgs; };
+    fzf = import ./fzf.nix { inherit pkgs; };
+    git = import ./git.nix { inherit pkgs config; };
   };
+
   home = {
     packages = with pkgs; [
       vim
@@ -40,4 +44,6 @@
     # Don't ever change this after the first build.  Don't ask questions.
     stateVersion = "24.05";
   };
+  xdg.enable = true;
+  xdg.configFile.nvim.source = mkOutOfStoreSymlink "/home/${username}/personal/.dotfiles/.config/nvim";
 }
