@@ -1,5 +1,4 @@
 .config/alacritty/themes/**
-.config/spicetify/
 .idea/
 **/lazy-lock.json
 *.log

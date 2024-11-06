@@ -146,3 +146,5 @@ alias gwtp='git pull origin $(git rev-parse --abbrev-ref HEAD)'
 [[ ! -f ~/.zshenv ]] || source ~/.zshenv
 # Shell integrations
 eval "$(zoxide init --cmd cd zsh)"
+
+export PATH=$PATH:/Users/tonyandyoehme/.spicetify
