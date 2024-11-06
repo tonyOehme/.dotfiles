@@ -26,6 +26,7 @@
   extraConfig =
     {
       rebase = {
+        updateRefs = true;
         autosquash = true;
         autostash = true;
       };
@@ -81,7 +82,7 @@
       commit = { verbose = true; };
       submodule = { recurse = true; };
       transfer = { fsckObjects = true; };
-      fetch = { fsckObjects = true; };
+      fetch = { prune = true; fsckObjects = true; };
       receive = { fsckObjects = true; };
     };
 }
