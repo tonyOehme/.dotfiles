@@ -3,12 +3,21 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nix-darwin.url = "github:LnL7/nix-darwin";
-    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+
+    nix-darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
+
+    home-manager = {
+      url = "github:nix-community/home-manager/release-24.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ self, nix-homebrew, nix-darwin, nixpkgs }:
+  outputs = inputs@{ self, nix-homebrew, nix-darwin, nixpkgs, home-manager }:
     let
       mac_setup = { pkgs, config, ... }: {
         homebrew = {
@@ -25,7 +34,6 @@
             "alfred"
             "shottr"
             "zen-browser"
-            "spotify"
             "iina"
             "keka"
             "maccy"
@@ -205,6 +213,7 @@
             google-chrome
             alacritty
             vscode
+            spotify
           ];
 
         # fonts
@@ -266,8 +275,10 @@
                 {
                   modules = [
                     mac_setup
+
                     configuration
                     { _module.args = { inherit system; }; }
+
                     nix-homebrew.darwinModules.nix-homebrew
                     {
                       nix-homebrew =
@@ -275,6 +286,14 @@
                         then { inherit user; enable = true; enableRosetta = true; }
                         else { inherit user; enable = true; };
                     }
+
+                    home-manager.darwinModules.home-manager
+                    {
+                      home-manager.useGlobalPkgs = true;
+                      home-manager.useUserPackages = true;
+                      home-manager.users.tonyyep = import ./home.nix;
+                    }
+
                   ];
                 };
 
