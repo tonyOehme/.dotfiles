@@ -14,27 +14,25 @@
         homebrew = {
           enable = true;
           casks = [
+            "jetbrains-toolbox"
             "firefox"
             "betterdisplay"
-            "jetbrains-toolbox"
-            "google-chrome"
             "docker"
             "protonvpn"
             "microsoft-office"
             "microsoft-teams"
+            "wezterm"
             "alfred"
             "shottr"
             "zen-browser"
-            "wezterm"
+            "spotify"
             "iina"
             "keka"
-            "spotify"
             "maccy"
             "nikitabobko/tap/aerospace"
           ];
           brews = [
             "mas"
-            "pnpm"
           ];
           taps = [ ];
           masApps = { };
@@ -49,10 +47,9 @@
             enable-spring-load-actions-on-all-items = true;
             persistent-apps = [
               "/Applications/WezTerm.app"
-              "/Applications/Google\ Chrome.app"
-              "/Applications/Spotify.app"
-              "/Applications/Nix\ Apps/Visual\ Studio\ Code.app"
-              "/Applications/Nix\ Apps/Vesktop.app"
+              "${pkgs.google-chrome}/Applications/Google\ Chrome.app"
+              "${pkgs.vscode}/Applications/Visual\ Studio\ Code.app"
+              "${pkgs.vesktop}/Applications/Vesktop.app"
             ];
             orientation = "bottom";
             autohide = true;
@@ -133,7 +130,7 @@
           CustomSystemPreferences = { };
 
         };
-        # copy applications from nix folder to macos /Applications
+
         system.activationScripts.applications.text =
           let
             env = pkgs.buildEnv {
@@ -142,11 +139,8 @@
               pathsToLink = "/Applications";
             };
           in
-          # setup battery percentage cuz i cant find it in nix darwin docs
           pkgs.lib.mkForce ''
-            echo "enabling battery percentage in menu bar"
-            defaults write ~/Library/Preferences/ByHost/com.apple.controlcenter.plist BatteryShowPercentage -bool true
-
+            # Set up applications.
             echo "setting up /Applications..." >&2
             rm -rf /Applications/Nix\ Apps
             mkdir -p /Applications/Nix\ Apps
@@ -198,16 +192,19 @@
             fzf
             zsh
             zoxide
-            vesktop
+            spicetify-cli
             rustup
             eza
             ripgrep
-            alacritty
             docker
             kitty
-            vscode
             stow
             nodejs_20
+
+            vesktop
+            google-chrome
+            alacritty
+            vscode
           ];
 
         # fonts
