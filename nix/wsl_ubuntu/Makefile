@@ -29,10 +29,7 @@ install-config:
 
 .PHONY: update-config
 update-config:
-	nix-channel --add https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz home-manager
-	nix-channel --update
-	nix-shell '<home-manager>' -A install
-	home-manager switch --extra-experimental-features 'nix-command flakes' --flake $(DOTFILESDIRECTORY)/nix/wsl_ubuntu#$(ARCHITECTURE)-$(KERNELNAME)/$(USERNAME)
+	nix run home-manager --extra-experimental-features 'nix-command flakes' -- switch --flake $(DOTFILESDIRECTORY)/nix/wsl_ubuntu#$(ARCHITECTURE)-$(KERNELNAME)/$(USERNAME)
 
 .PHONY: clean
 clean:

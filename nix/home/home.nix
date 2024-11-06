@@ -2,7 +2,7 @@
 {
   programs = {
     #tmux = import ./tmux.nix { inherit pkgs; };
-    #zsh = import ./zsh.nix { inherit config pkgs lib; };
+    zsh = import ./zsh.nix { inherit config pkgs lib; };
     #zoxide = import ./zoxide.nix { inherit config pkgs; };
     #fzf = import ./fzf.nix { inherit pkgs; };
   };
