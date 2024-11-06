@@ -10,15 +10,35 @@
   #   key = null;
   # };
 
+  # delta = {
+  #   enable = true;
+  #   options = {
+  #     decorations = {
+  #       commit-decoration-style = "bold yellow box ul";
+  #       file-decoration-style = "none";
+  #       file-style = "bold yellow ul";
+  #     };
+  #     features = "decorations";
+  #     whitespace-error-style = "22 reverse";
+  #   };
+  # };
+
   extraConfig =
     {
+      rebase = {
+        autosquash = true;
+        autostash = true;
+      };
+
       pull = {
         rebase = true;
         ff = "only";
       };
+
       init = {
         defaultBranch = "main";
       };
+
       diff = {
         algorithm = "histogram";
         renames = true;
@@ -50,12 +70,11 @@
       };
 
       merge = {
-        conflictstyle = "diff3";
+        conflictstyle = "zdiff3";
       };
 
       push = {
         autoSetupRemote = true;
-        default = "current";
       };
 
       rerere = { enabled = true; };
