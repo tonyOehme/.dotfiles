@@ -250,6 +250,7 @@
 
 
       users = [
+        "testuser"
         "kia"
         "tonyandyoehme"
         "tonyyep"

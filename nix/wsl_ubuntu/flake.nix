@@ -16,7 +16,10 @@
         "x86_64-linux"
         "aarch64-linux"
       ];
-      users = [ "tonyyep" ];
+      users = [
+        "testuser"
+        "tonyyep"
+      ];
     in
     {
       homeConfigurations = builtins.listToAttrs (builtins.concatMap

@@ -18,9 +18,8 @@ nix-install:
 .PHONY: install-config
 install-config:
 	nix-shell -p git --run 'git clone https://github.com/tonyOehme/.dotfiles.git $(DOTFILESDIRECTORY)'
-	nix-channel --add https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz home-manager
-	nix-channel --update
-	nix-shell '<home-manager>' -A install
+	sed -i '' "/testuser/a\\\t \"$(whoami)\" " $(DOTFILESDIRECTORY)/nix/macOS/flake.nix
+
 	home-manager switch --extra-experimental-features 'nix-command flakes' --flake $(FLAKE)
 	cd $(DOTFILESDIRECTORY)
 	git submodule update --init --recursive
