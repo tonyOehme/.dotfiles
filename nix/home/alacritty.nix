@@ -2,7 +2,7 @@
   enable = true;
   package = pkgs.alacritty;
   settings = {
-    import = [ pkgs.alacritty-theme.tokyo-night ];
+    general.import = [ pkgs.alacritty-theme.dracula ];
     env = {
 
       TERM = "xterm-256color";
@@ -14,10 +14,22 @@
       option_as_alt = "Both";
     };
 
+    cursor = { style = "Block"; };
 
-    shell = {
-      program = pkgs.zsh;
-    };
+    font =
+      let
+        jetbrainsMono = style: {
+          family = "JetBrainsMono Nerd Font";
+          inherit style;
+        };
+      in
+      {
+        size = 19;
+        normal = jetbrainsMono "Regular";
+        bold = jetbrainsMono "Bold";
+        italic = jetbrainsMono "Italic";
+        bold_italic = jetbrainsMono "Bold Italic";
+      };
 
   };
 }
