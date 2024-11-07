@@ -1,5 +1,6 @@
 { pkgs, ... }: {
   enable = true;
+  package = pkgs.alacritty;
   settings = {
     import = [ pkgs.alacritty-theme.tokyo-night ];
     env = {

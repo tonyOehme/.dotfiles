@@ -2,6 +2,10 @@
   enable = true;
   history.size = 10000;
   history.path = "${config.xdg.dataHome}/zsh/history";
+  sessionVariables = {
+
+    POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD = true;
+  };
   shellAliases = {
     n = "nvim .";
     ls = "eza --icons";
@@ -116,7 +120,7 @@
     setopt combining_chars        # combine zero-length punctuation characters (accents) with the base character
     setopt vi                     # use emacs keybindings in the shell
 
-    [-f ~/.p10k.zsh ] && source ~/.p10.zsh
+    [ -f ~/.p10k.zsh ] && source ~/.p10k.zsh
 
   '';
   oh-my-zsh = {
