@@ -173,14 +173,16 @@
           swapLeftCtrlAndFn = true;
         };
 
-
       };
       configuration = { pkgs, config, system, user, ... }: {
         # List packages installed in system profile. To search by name, run:
         # $ nix-env -qaP | grep wget
         nixpkgs.config.allowUnfree = true;
         # for some reason this fixes home-manger
-        users.users.${user}.home = "/Users/${user}";
+        users.users.${user} = {
+          name = user;
+          home = "/Users/${user}";
+        };
         environment.shellAliases = {
           ls = "eza --icons=always";
           n = "nvim .";
@@ -327,32 +329,6 @@
               self.darwinConfigurations."${system}/${user}".pkgs)
             users; in mapper)
         systems;
-      # darwinConfigurations."tonymacaroni" = nix-darwin.lib.darwinSystem {
-      #   system = "x86_64-darwin";
-      #   modules = [
-      #     mac_setup
-      #
-      #     configuration
-      #     {
-      #       _module.args = {
-      #         user = "tonymacaroni";
-      #         system = "x86_64-darwin";
-      #       };
-      #     }
-      #
-      #     home-manager.darwinModules.home-manager
-      #     {
-      #       # `home-manager` config
-      #       home-manager.useGlobalPkgs = true;
-      #       home-manager.useUserPackages = true;
-      #       home-manager.users.tonymacaroni = import ./home.nix;
-      #       home-manager.extraSpecialArgs = { user = "tonymacaroni"; };
-      #     }
-      #   ];
-      # };
-      #
-      # # Expose the package set, including overlays, for convenience.
-      # darwinPackages = self.darwinConfigurations."tonymacaroni".pkgs;
     };
 }
 

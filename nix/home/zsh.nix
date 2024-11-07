@@ -14,17 +14,9 @@
   };
   initExtra = ''
 
-    [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-    [[ ! -f ~/.fzf.zsh ]] || source ~/.fzf.zsh
-    [[ ! -f ~/.zprofile ]] || source ~/.zprofile
 
     ZSH_DISABLE_COMPFIX=true
     export EDITOR=nvim
-    if [ -n "$TTY" ]; then
-      export GPG_TTY=$(tty)
-    else
-      export GPG_TTY="$TTY"
-    fi
     # disable sort when completing `git checkout`
     zstyle ':completion:*:git-checkout:*' sort false
 
