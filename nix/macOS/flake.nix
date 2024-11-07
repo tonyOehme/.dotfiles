@@ -2,7 +2,7 @@
   description = "Tony ADHD Darwin system flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-24.05-darwin";
 
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
@@ -152,6 +152,10 @@
             };
           in
           pkgs.lib.mkForce ''
+            # show battery percentage in menu bar
+            echo "show battery percentage"
+            defaults write ~/Library/Preferences/ByHost/com.apple.controlcenter.plist BatteryShowPercentage -bool true
+
             # Set up applications.
             echo "setting up /Applications..." >&2
             rm -rf /Applications/Nix\ Apps
@@ -171,10 +175,12 @@
 
 
       };
-      configuration = { pkgs, config, system, ... }: {
+      configuration = { pkgs, config, system, user, ... }: {
         # List packages installed in system profile. To search by name, run:
         # $ nix-env -qaP | grep wget
         nixpkgs.config.allowUnfree = true;
+        # for some reason this fixes home-manger
+        users.users.${user}.home = "/Users/${user}";
         environment.shellAliases = {
           ls = "eza --icons=always";
           n = "nvim .";
@@ -281,7 +287,7 @@
                     mac_setup
 
                     configuration
-                    { _module.args = { inherit system; }; }
+                    { _module.args = { inherit system user; }; }
 
                     nix-homebrew.darwinModules.nix-homebrew
                     {
@@ -303,9 +309,7 @@
                           }
                         ];
 
-                      home-manager.extraSpecialArgs = {inherit user;};
-                      # Optionally, use home-manager.extraSpecialArgs to pass
-                      # arguments to home.nix
+                      home-manager.extraSpecialArgs = { inherit user; };
                     }
 
                   ];
@@ -323,6 +327,32 @@
               self.darwinConfigurations."${system}/${user}".pkgs)
             users; in mapper)
         systems;
+      # darwinConfigurations."tonymacaroni" = nix-darwin.lib.darwinSystem {
+      #   system = "x86_64-darwin";
+      #   modules = [
+      #     mac_setup
+      #
+      #     configuration
+      #     {
+      #       _module.args = {
+      #         user = "tonymacaroni";
+      #         system = "x86_64-darwin";
+      #       };
+      #     }
+      #
+      #     home-manager.darwinModules.home-manager
+      #     {
+      #       # `home-manager` config
+      #       home-manager.useGlobalPkgs = true;
+      #       home-manager.useUserPackages = true;
+      #       home-manager.users.tonymacaroni = import ./home.nix;
+      #       home-manager.extraSpecialArgs = { user = "tonymacaroni"; };
+      #     }
+      #   ];
+      # };
+      #
+      # # Expose the package set, including overlays, for convenience.
+      # darwinPackages = self.darwinConfigurations."tonymacaroni".pkgs;
     };
 }
 
