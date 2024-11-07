@@ -72,5 +72,5 @@
     bind-key -r H run-shell "~/scripts/tmux-sessionizer ~"
 
 
-  '';
+ '';
 }

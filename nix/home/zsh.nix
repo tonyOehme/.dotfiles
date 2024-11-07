@@ -16,7 +16,6 @@
 
 
     ZSH_DISABLE_COMPFIX=true
-    export EDITOR=nvim
     # disable sort when completing `git checkout`
     zstyle ':completion:*:git-checkout:*' sort false
 
@@ -117,6 +116,7 @@
     setopt combining_chars        # combine zero-length punctuation characters (accents) with the base character
     setopt vi                     # use emacs keybindings in the shell
 
+    [-f ~/.p10k.zsh ] && source ~/.p10.zsh
 
   '';
   oh-my-zsh = {

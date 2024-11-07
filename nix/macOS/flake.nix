@@ -15,9 +15,10 @@
       url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+alacritty-theme.url = "github:alexghr/alacritty-theme.nix";
   };
 
-  outputs = inputs@{ self, nix-homebrew, nix-darwin, nixpkgs, home-manager }:
+  outputs = inputs@{ self, nix-homebrew, nix-darwin, nixpkgs, alacritty-theme, home-manager }:
     let
       mac_setup = { pkgs, config, ... }: {
         homebrew = {
@@ -58,7 +59,7 @@
             mineffect = "scale";
             enable-spring-load-actions-on-all-items = true;
             persistent-apps = [
-              "/Applications/WezTerm.app"
+"/Applications/WezTerm.app"
               "${pkgs.google-chrome}/Applications/Google\ Chrome.app"
               "${pkgs.vscode}/Applications/Visual\ Studio\ Code.app"
               "${pkgs.vesktop}/Applications/Vesktop.app"
@@ -177,6 +178,7 @@
       configuration = { pkgs, config, system, user, ... }: {
         # List packages installed in system profile. To search by name, run:
         # $ nix-env -qaP | grep wget
+nixpkgs.overlays = [ alacritty-theme.overlays.default ];
         nixpkgs.config.allowUnfree = true;
         # for some reason this fixes home-manger
         users.users.${user} = {
@@ -219,7 +221,8 @@
             kitty
             stow
             nodejs_20
-
+            #gui
+#wezterm
             vesktop
             google-chrome
             alacritty
