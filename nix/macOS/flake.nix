@@ -253,6 +253,7 @@
         "testuser"
         "kia"
         "tonyandyoehme"
+        "tonymacaroni"
         "tonyyep"
       ];
       systems = [
@@ -295,8 +296,14 @@
                       home-manager.useGlobalPkgs = true;
                       home-manager.useUserPackages = true;
                       home-manager.users =
-                        builtins.listToAttrs [{ name = user; value = import ./home.nix; }];
+                        builtins.listToAttrs [
+                          {
+                            name = user;
+                            value = import ./home.nix;
+                          }
+                        ];
 
+                      home-manager.extraSpecialArgs = {inherit user;};
                       # Optionally, use home-manager.extraSpecialArgs to pass
                       # arguments to home.nix
                     }
