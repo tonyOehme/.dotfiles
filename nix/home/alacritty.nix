@@ -3,12 +3,12 @@
   package = pkgs.alacritty;
   settings = {
     general.import = [ pkgs.alacritty-theme.dracula ];
-    env = {
 
+    env = {
       TERM = "xterm-256color";
     };
-    window = {
 
+    window = {
       decorations = "Buttonless";
       startup_mode = "Maximized";
       option_as_alt = "Both";
