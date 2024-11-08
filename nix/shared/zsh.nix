@@ -19,6 +19,7 @@
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
     eval $(ssh-agent) > /dev/null
     [ -d ~/.ssh ] && find ~/.ssh -name 'id_*' ! -name '*.pub' -exec ssh-add -q {} \;
+    [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ] && $HOME/.nix-profile/etc/profile.d/nix.sh;
 
   '';
   sessionVariables = { };
@@ -137,17 +138,19 @@
     setopt combining_chars        # combine zero-length punctuation characters (accents) with the base character
     setopt vi                     # use emacs keybindings in the shell
 
+
     [ -f ~/personal/.dotfiles/.p10k.zsh ] && source ~/personal/.dotfiles/.p10k.zsh
 
   '';
-  oh-my-zsh = {
+  antidote = {
     enable = true;
+    useFriendlyNames = true;
     plugins = [
-      "git"
-      "sudo"
-      "command-not-found"
-      "pass"
-      "helm"
+      # omz plugins
+      "getantidote/use-omz"
+      "ohmyzsh/ohmyzsh path:plugins/git"
+      "ohmyzsh/ohmyzsh path:plugins/sudo"
+      "ohmyzsh/ohmyzsh path:plugins/command-not-found"
     ];
   };
   plugins = [
