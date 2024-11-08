@@ -7,7 +7,6 @@
   keyMode = "vi";
   newSession = true;
   secureSocket = true;
-  shell = "${pkgs.zsh}/bin/zsh";
   terminal = "screen-256color";
 
   plugins = with pkgs.tmuxPlugins; [
@@ -24,6 +23,7 @@
     set-option -sa terminal-overrides ",xterm-256color:RGB"
     set -s escape-time 0
     set -g mouse on
+    set-option -g default-shell ${pkgs.zsh}/bin/zsh
 
     unbind C-b
     unbind f
@@ -72,5 +72,5 @@
     bind-key -r H run-shell "~/scripts/tmux-sessionizer ~"
 
 
- '';
+  '';
 }

@@ -27,6 +27,7 @@
             #nix repo version does not work
             "jetbrains-toolbox"
             "firefox"
+            "wezterm"
             #needs to be here because of spicetify
             "spotify"
             #maconly apps
@@ -58,7 +59,7 @@
             mineffect = "scale";
             enable-spring-load-actions-on-all-items = true;
             persistent-apps = [
-              "${pkgs.wezterm}/Applications/WezTerm.app"
+              # "${pkgs.wezterm}/Applications/WezTerm.app"
               "${pkgs.google-chrome}/Applications/Google\ Chrome.app"
               "${pkgs.vscode}/Applications/Visual\ Studio\ Code.app"
               "${pkgs.vesktop}/Applications/Vesktop.app"
@@ -220,8 +221,8 @@
             kitty
             stow
             nodejs_20
+            spicetify-cli
             #gui
-            wezterm
             vesktop
             google-chrome
             alacritty
