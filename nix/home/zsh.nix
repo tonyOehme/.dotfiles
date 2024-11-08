@@ -2,30 +2,28 @@
   enable = true;
   history.size = 10000;
   history.path = "${config.xdg.dataHome}/zsh/history";
-  profileExtra = ''
+  envExtra = ''
 
     export PATH=$HOME/.local/bin:$PATH
     export PATH=$HOME/Library/Application\ Support/Jetbrains/Toolbox/scripts:$PATH
     export PATH=$PATH:/Users/tony-andy.oehme/.spicetify
-    export VISUAL="nvim"
-    export EDITOR="nvim"
-    export GIT_EDITOR="nvim"
     export PATH=$PATH:/Users/tony-andy.oehme/.spicetify
-    export NVM_DIR="$HOME/.nvm"
+    export VISUAL="nvim";
+    export EDITOR="nvim";
+    export GIT_EDITOR="nvim";
+    export NVM_DIR="$HOME/.nvm";
+  '';
+  profileExtra = ''
+
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
     eval $(ssh-agent) > /dev/null
     [ -d ~/.ssh ] && find ~/.ssh -name 'id_*' ! -name '*.pub' -exec ssh-add -q {} \;
 
   '';
-  sessionVariables = {
-
-    VISUAL = "nvim";
-    EDITOR = "nvim";
-    GIT_EDITOR = "nvim";
-
-  };
+  sessionVariables = { };
   shellAliases = {
+
     n = "nvim .";
     ls = "eza --icons";
     c = "code .";
@@ -139,7 +137,7 @@
     setopt combining_chars        # combine zero-length punctuation characters (accents) with the base character
     setopt vi                     # use emacs keybindings in the shell
 
-    [ -f ~/.p10k.zsh ] && source ~/.p10k.zsh
+    [ -f ~/personal/.dotfiles/.p10k.zsh ] && source ~/personal/.dotfiles/.p10k.zsh
 
   '';
   oh-my-zsh = {
@@ -181,7 +179,7 @@
     {
       name = "powerlevel10k-config";
       src = lib.cleanSource ../../.p10k.zsh;
-      file = "p10k.zsh";
+      file = ".p10k.zsh";
     }
     {
       name = "fzf-tab";
