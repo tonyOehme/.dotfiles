@@ -4,8 +4,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
-    vscode-remote-workaround.url = "github:K900/vscode-remote-workaround/main";
-
     home-manager = {
       url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -13,13 +11,12 @@
 
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, vscode-workaround }:
+  outputs = inputs@{ self, nixpkgs, home-manager, }:
     let
       configuration = { pkgs, config, system, user, ... }: {
         # List packages installed in system profile. To search by name, run:
         # $ nix-env -qaP | grep wget
 
-        vscode-remote-workaround.enable = true;
         # for some reason this fixes home-manger
         users.users.${user} = {
           name = user;
@@ -61,6 +58,7 @@
             stow
             nodejs_20
             spicetify-cli
+            python3
             # gui
             # kitty
             # vesktop
@@ -104,7 +102,9 @@
       ];
       systems = [
         "x86_64-linux"
+        "x86_64-darwin"
         "aarch64-linux"
+        "aarch64-darwin"
       ];
 
     in
