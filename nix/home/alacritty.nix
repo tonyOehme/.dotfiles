@@ -9,9 +9,15 @@
     };
 
     window = {
+      padding = {
+        x = 0;
+        y = 0;
+      };
       decorations = "Buttonless";
-      startup_mode = "Maximized";
+      opacity = 1;
       option_as_alt = "Both";
+      startup_mode = "Maximized";
+      decorations_theme_variant = "None";
     };
 
     cursor = { style = "Block"; };

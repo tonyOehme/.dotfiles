@@ -9,12 +9,12 @@
   secureSocket = true;
   terminal = "screen-256color";
 
-  plugins = with pkgs.tmuxPlugins; [
-    # tokyo-night
-    # yank
-    # sensible
-    # vim-tmux-navigator
-  ];
+  # plugins = with pkgs.tmuxPlugins; [
+  #   tokyo-night
+  #   yank
+  #   sensible
+  #   vim-tmux-navigator
+  # ];
 
   extraConfig = ''
     set -g default-terminal "screen-256color"
@@ -23,7 +23,6 @@
     set-option -sa terminal-overrides ",xterm-256color:RGB"
     set -s escape-time 0
     set -g mouse on
-    set-option -g default-shell ${pkgs.zsh}/bin/zsh
 
     unbind C-b
     unbind f
@@ -71,6 +70,6 @@
     bind-key -r P run-shell "~/scripts/tmux-sessionizer ~/personal"
     bind-key -r H run-shell "~/scripts/tmux-sessionizer ~"
 
-
+    run-shell "zsh"
   '';
 }
