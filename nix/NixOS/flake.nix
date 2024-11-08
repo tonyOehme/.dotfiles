@@ -4,19 +4,22 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
+    vscode-remote-workaround.url = "github:K900/vscode-remote-workaround/main";
+
     home-manager = {
       url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    alacritty-theme.url = "github:alexghr/alacritty-theme.nix";
+
   };
 
-  outputs = inputs@{ self, nixpkgs, alacritty-theme, home-manager }:
+  outputs = inputs@{ self, nixpkgs, home-manager, vscode-workaround }:
     let
       configuration = { pkgs, config, system, user, ... }: {
         # List packages installed in system profile. To search by name, run:
         # $ nix-env -qaP | grep wget
 
+        vscode-remote-workaround.enable = true;
         # for some reason this fixes home-manger
         users.users.${user} = {
           name = user;
@@ -40,6 +43,7 @@
         };
         environment.systemPackages = with pkgs;
           [
+            wget
             vim
             yazi
             neovim
@@ -54,15 +58,15 @@
             eza
             ripgrep
             docker
-            kitty
             stow
             nodejs_20
             spicetify-cli
-            #gui
-            vesktop
-            google-chrome
-            alacritty
-            vscode
+            # gui
+            # kitty
+            # vesktop
+            # google-chrome
+            # alacritty
+            # vscode
           ];
 
         # fonts
