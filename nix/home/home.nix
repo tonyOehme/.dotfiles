@@ -34,6 +34,7 @@ let inherit (config.lib.file) mkOutOfStoreSymlink; in
       stow
       nodejs_20
       tree-sitter
+      python3
     ];
 
     # This needs to actually be set to your username

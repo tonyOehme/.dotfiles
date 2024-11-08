@@ -57,18 +57,18 @@
     # bind -r D neww -c "#{pane_current_path}" "[[ -e TODO.md ]] && nvim TODO.md || nvim ~/.dotfiles/personal/todo.md"
 
     # forget the find window.  That is for chumps
-    bind-key -n C-f run-shell "tmux neww ~/scripts/tmux-sessionizer"
+    bind-key -n C-f run-shell "tmux neww ~/personal/.dotfiles/scripts/tmux-sessionizer"
 
     # Easier and faster switching between next/prev window
     bind -r p previous-window
     bind -r n next-window
     bind -r t new-window
 
-    bind-key -r i run-shell "tmux neww ~/scripts/tmux-cht.sh"
-    bind-key -r S run-shell "~/scripts/tmux-sessionizer ~/studium"
-    bind-key -r W run-shell "~/scripts/tmux-sessionizer ~/work"
-    bind-key -r P run-shell "~/scripts/tmux-sessionizer ~/personal"
-    bind-key -r H run-shell "~/scripts/tmux-sessionizer ~"
+    bind-key -r i run-shell "tmux neww ~/personal/.dotfiles/scripts/tmux-cht.sh"
+    bind-key -r S run-shell "~/personal/.dotfiles/scripts/tmux-sessionizer ~/studium"
+    bind-key -r W run-shell "~/personal/.dotfiles/scripts/tmux-sessionizer ~/work"
+    bind-key -r P run-shell "~/personal/.dotfiles/scripts/tmux-sessionizer ~/personal"
+    bind-key -r H run-shell "~/personal/.dotfiles/scripts/tmux-sessionizer ~"
 
     run-shell "zsh"
   '';
