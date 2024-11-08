@@ -3,11 +3,11 @@ let inherit (config.lib.file) mkOutOfStoreSymlink; in
 {
   programs = {
 
-    tmux = import ./tmux.nix { inherit pkgs; };
-    zsh = import ./zsh.nix { inherit config pkgs lib; };
-    zoxide = import ./zoxide.nix { inherit config pkgs; };
-    fzf = import ./fzf.nix { inherit pkgs; };
-    git = import ./git.nix { inherit pkgs config; };
+    tmux = import ../shared/tmux.nix { inherit pkgs; };
+    zsh = import ../shared/zsh.nix { inherit config pkgs lib; };
+    zoxide = import ../shared/zoxide.nix { inherit config pkgs; };
+    fzf = import ../shared/fzf.nix { inherit pkgs; };
+    git = import ../shared/git.nix { inherit pkgs config; };
   };
 
   home = {

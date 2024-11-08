@@ -5,9 +5,13 @@
   baseIndex = 1;
   disableConfirmationPrompt = true;
   keyMode = "vi";
+  clock24 = true;
+  mouse = true;
   newSession = true;
   secureSocket = true;
   terminal = "screen-256color";
+  prefix = "C-a";
+  shell = "${pkgs.zsh}/bin/zsh";
 
   # plugins = with pkgs.tmuxPlugins; [
   #   tokyo-night
@@ -22,17 +26,10 @@
     set -g default-terminal screen-256color
     set-option -sa terminal-overrides ",xterm-256color:RGB"
     set -s escape-time 0
-    set -g mouse on
 
     unbind C-b
     unbind f
-    set-option -g prefix C-a
-    bind-key C-a send-prefix
     set -g status-style 'bg=#21222c fg=#50fa7b'
-
-    unbind r
-    bind r source-file ~/.tmux.conf
-    set -g base-index 1
 
     unbind %
     unbind c
@@ -70,6 +67,5 @@
     bind-key -r P run-shell "~/personal/.dotfiles/scripts/tmux-sessionizer ~/personal"
     bind-key -r H run-shell "~/personal/.dotfiles/scripts/tmux-sessionizer ~"
 
-    run-shell "zsh"
   '';
 }

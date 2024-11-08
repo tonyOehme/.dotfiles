@@ -31,7 +31,7 @@
                 value = home-manager.lib.homeManagerConfiguration {
                   pkgs = import nixpkgs { inherit system; };
                   modules = [
-                    ../home/home.nix
+                    ./home.nix
                     { _module.args = { username = user; }; }
                   ];
                 };
