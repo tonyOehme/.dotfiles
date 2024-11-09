@@ -1,4 +1,4 @@
-return {
+eturn {
     "neovim/nvim-lspconfig",
     dependencies = {
         "williamboman/mason.nvim",
@@ -39,7 +39,7 @@ return {
                 "yamlls",
                 "jsonls",
                 "lua_ls",
-                "pylsp",
+                "pyright",
                 -- nix
                 "rnix",
                 "nil_ls",
