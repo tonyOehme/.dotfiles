@@ -59,6 +59,7 @@
             zoxide
             rustup
             eza
+            python312Packages.pip
             ripgrep
             docker
             stow
