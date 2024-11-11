@@ -21,6 +21,7 @@
   nixpkgs.config.allowUnfree = true;
   programs.zsh.enable = true;
 
+  networking.nameservers = [ "8.8.8.8" "8.8.4.4" ];
   wsl.enable = true;
   wsl.defaultUser = "nixos";
   users.users.nixos = {

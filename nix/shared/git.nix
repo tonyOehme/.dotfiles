@@ -4,6 +4,10 @@
   lfs.enable = true;
   userName = "Tony Andy Oehme";
   userEmail = "tony-andy.oehme@tum.de";
+  ignores = [
+    ".idea/"
+    ".DS_STORE"
+  ];
 
   # signing = {
   #   signByDefault = true;

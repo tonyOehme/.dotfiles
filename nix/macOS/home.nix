@@ -15,7 +15,6 @@ in
 
   programs = {
     home-manager.enable = true;
-
     tmux = import ../shared/tmux.nix { inherit pkgs; };
     zsh = import ../shared/zsh.nix { inherit config pkgs lib; };
     zoxide = import ../shared/zoxide.nix { inherit config pkgs; };

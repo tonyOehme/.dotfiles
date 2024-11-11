@@ -4,10 +4,9 @@
   history.path = "${config.xdg.dataHome}/zsh/history";
   envExtra = ''
 
-    export PATH=$HOME/.local/bin:$PATH
-    export PATH=$HOME/Library/Application\ Support/Jetbrains/Toolbox/scripts:$PATH
-    export PATH=$PATH:/Users/tony-andy.oehme/.spicetify
-    export PATH=$PATH:/Users/tony-andy.oehme/.spicetify
+    export PATH=$PATH:$HOME/.local/bin
+    export PATH=$PATH:$HOME/Library/Application\ Support/Jetbrains/Toolbox/scripts
+    export PATH=$PATH:$HOME/.spicetify
   '';
   profileExtra = ''
 
@@ -15,9 +14,13 @@
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
     eval $(ssh-agent) > /dev/null
     [ -d ~/.ssh ] && find ~/.ssh -name 'id_*' ! -name '*.pub' -exec ssh-add -q {} \;
+    [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ] && $HOME/.nix-profile/etc/profile.d/nix.sh;
 
   '';
-  sessionVariables = { };
+  sessionVariables = {
+
+    ZSH_DISABLE_COMPFIX = true;
+  };
   shellAliases = {
 
     n = "nvim .";
@@ -32,7 +35,6 @@
   initExtra = ''
 
 
-    ZSH_DISABLE_COMPFIX=true
     # disable sort when completing `git checkout`
     zstyle ':completion:*:git-checkout:*' sort false
 

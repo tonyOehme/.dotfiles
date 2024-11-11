@@ -3,16 +3,9 @@
   enableZshIntegration = true;
   extraConfig = ''
 
-    -- Pull in the wezterm API
     local wezterm = require("wezterm")
 
-    -- This will hold the configuration.
     local config = wezterm.config_builder()
-
-    -- This is where you actually apply your config choices
-
-    -- my coolnight colorscheme
-
     config.font = wezterm.font("JetBrainsMonoNL Nerd Font Propo", { weight = "Medium", italic = false })
     config.color_scheme = "OneDark (base16)"
     config.font_size = 19
