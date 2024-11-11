@@ -59,7 +59,7 @@
             mineffect = "scale";
             enable-spring-load-actions-on-all-items = true;
             persistent-apps = [
-              # "${pkgs.wezterm}/Applications/WezTerm.app"
+              "${pkgs.alacritty}/Applications/WezTerm.app"
               "${pkgs.google-chrome}/Applications/Google\ Chrome.app"
               "${pkgs.vscode}/Applications/Visual\ Studio\ Code.app"
               "${pkgs.vesktop}/Applications/Vesktop.app"
@@ -212,13 +212,11 @@
             tldr
             thefuck
             fzf
-            zsh
             zoxide
             rustup
             eza
             ripgrep
             docker
-            kitty
             stow
             nodejs_20
             spicetify-cli
