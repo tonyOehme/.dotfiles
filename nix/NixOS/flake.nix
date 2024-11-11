@@ -8,10 +8,14 @@
       url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-ld = {
+      url = "github:Mic92/nix-ld";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, }:
+  outputs = inputs@{ self, nix-ld, nixpkgs, home-manager }:
     let
       configuration = { pkgs, config, system, user, ... }: {
         # List packages installed in system profile. To search by name, run:
@@ -32,6 +36,7 @@
           gwtp = "git pull origin $(git rev-parse --abbrev-ref HEAD)";
 
         };
+        programs.nix-ld.dev.enable = true;
         environment.variables = {
           VISUAL = "nvim";
           EDITOR = "nvim";
@@ -50,12 +55,14 @@
             thefuck
             fzf
             zsh
+            tree-sitter
             zoxide
             rustup
             eza
             ripgrep
             docker
             stow
+            gcc
             nodejs_20
             spicetify-cli
             python3
@@ -123,6 +130,8 @@
                   modules = [
                     ./wsl.nix
 
+                    nix-ld.nixosModules.nix-ld
+
                     configuration
                     { _module.args = { inherit system; user = username; }; }
 
@@ -135,11 +144,11 @@
                         builtins.listToAttrs [
                           {
                             name = username;
-                            value = import ../home/home.nix;
+                            value = import ./home.nix;
                           }
                         ];
 
-                      home-manager.extraSpecialArgs = { inherit username; };
+                      home-manager.extraSpecialArgs = { user = username; };
                     }
 
                   ];

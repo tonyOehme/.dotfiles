@@ -8,10 +8,6 @@
     export PATH=$HOME/Library/Application\ Support/Jetbrains/Toolbox/scripts:$PATH
     export PATH=$PATH:/Users/tony-andy.oehme/.spicetify
     export PATH=$PATH:/Users/tony-andy.oehme/.spicetify
-    export VISUAL="nvim";
-    export EDITOR="nvim";
-    export GIT_EDITOR="nvim";
-    export NVM_DIR="$HOME/.nvm";
   '';
   profileExtra = ''
 
@@ -19,7 +15,6 @@
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
     eval $(ssh-agent) > /dev/null
     [ -d ~/.ssh ] && find ~/.ssh -name 'id_*' ! -name '*.pub' -exec ssh-add -q {} \;
-    [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ] && $HOME/.nix-profile/etc/profile.d/nix.sh;
 
   '';
   sessionVariables = { };
@@ -138,6 +133,7 @@
     setopt combining_chars        # combine zero-length punctuation characters (accents) with the base character
     setopt vi                     # use emacs keybindings in the shell
 
+    export NIX_LD=$(nix eval --impure --raw --expr ' let pkgs = import <nixpkgs> {}; NIX_LD = pkgs.lib.fileContents "${pkgs.stdenv.cc}/nix-support/dynamic-linker"; in NIX_LD ')
 
     [ -f ~/personal/.dotfiles/.p10k.zsh ] && source ~/personal/.dotfiles/.p10k.zsh
 
