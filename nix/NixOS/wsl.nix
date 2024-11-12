@@ -15,8 +15,8 @@
   nix = {
     package = pkgs.nix;
     extraOptions = ''
-      			experimental-features = nix-command flakes
-      			'';
+      experimental-features = nix-command flakes
+    '';
   };
   nixpkgs.config.allowUnfree = true;
   programs.zsh.enable = true;
