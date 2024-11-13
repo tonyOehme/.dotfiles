@@ -204,6 +204,8 @@
             ripgrep
             docker
             stow
+            nushell
+            starship
             nodejs_20
             spicetify-cli
             #gui
