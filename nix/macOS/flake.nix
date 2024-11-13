@@ -185,16 +185,7 @@
           name = user;
           home = "/Users/${user}";
         };
-        environment.shellAliases = {
-          ls = "eza --icons=always";
-          n = "nvim .";
-          c = "code .";
-          a = "tmux attach";
-          y = "yazi";
-          gap = "git commit -am \"automated push\"; git push' alias b = \"bat\"";
-          gwtp = "git pull origin $(git rev-parse --abbrev-ref HEAD)";
-
-        };
+        environment.shellAliases = import ../shared/aliases.nix;
         environment.variables = {
           VISUAL = "nvim";
           EDITOR = "nvim";

@@ -26,16 +26,7 @@
           name = user;
           home = "/home/${user}";
         };
-        environment.shellAliases = {
-          ls = "eza --icons=always";
-          n = "nvim .";
-          c = "code .";
-          a = "tmux attach";
-          y = "yazi";
-          gap = "git commit -am \"automated push\"; git push' alias b = \"bat\"";
-          gwtp = "git pull origin $(git rev-parse --abbrev-ref HEAD)";
-
-        };
+        environment.shellAliases = import ../shared/aliases.nix;
         programs.nix-ld.dev.enable = true;
         environment.variables = {
           VISUAL = "nvim";
@@ -59,6 +50,8 @@
             zoxide
             rustup
             eza
+            starship
+            nushell
             python312Packages.pip
             ripgrep
             docker
