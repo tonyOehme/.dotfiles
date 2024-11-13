@@ -17,10 +17,7 @@
     [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ] && $HOME/.nix-profile/etc/profile.d/nix.sh;
 
   '';
-  sessionVariables = {
-
-    ZSH_DISABLE_COMPFIX = true;
-  };
+  sessionVariables = import ./variables.nix;
   shellAliases = import ./aliases.nix;
   initExtra = ''
 

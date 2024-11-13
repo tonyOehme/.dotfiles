@@ -28,12 +28,7 @@
         };
         environment.shellAliases = import ../shared/aliases.nix;
         programs.nix-ld.dev.enable = true;
-        environment.variables = {
-          VISUAL = "nvim";
-          EDITOR = "nvim";
-          GIT_EDITOR = "nvim";
-          NVM_DIR = "$HOME/.nvm";
-        };
+        environment.variables = import ../shared/variables.nix;
         environment.systemPackages = with pkgs;
           [
             wget
