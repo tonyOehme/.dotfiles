@@ -59,7 +59,7 @@
             mineffect = "scale";
             enable-spring-load-actions-on-all-items = true;
             persistent-apps = [
-              "${pkgs.alacritty}/Applications/WezTerm.app"
+              "${pkgs.alacritty}/Applications/Alacritty.app"
               "${pkgs.google-chrome}/Applications/Google\ Chrome.app"
               "${pkgs.vscode}/Applications/Visual\ Studio\ Code.app"
               "${pkgs.vesktop}/Applications/Vesktop.app"
