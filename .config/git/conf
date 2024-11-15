@@ -1,29 +1,29 @@
 [user]
-	name = Tony Andy Oehme
-	email = tony-andy.oehme@tum.de
+	name = "Tony Andy Oehme"
+	email = "tony-andy.oehme@tum.de"
 [init]
-	defaultBranch = main
+	defaultBranch = "main"
 [core]
-	editor = nvim
-    pager = cat
-	excludesfile = ~/.gitignore_global
-    whitespace = -trailing-space
+	editor = "nvim"
+    pager = "cat"
+	excludesfile = "~/.gitignore_global"
+    whitespace = "-trailing-space"
 [pull]
-    ff = only
+    ff = "only"
 [diff]
-    algorithm = histogram
+    algorithm = "histogram"
     renames = true
-    wordRegex = .
-    submodule = log
+    wordRegex = "."
+    submodule = "log"
     mnemonicPrefix = true
 	colorMoved = true
 [color]
-	ui = auto
+	ui = "auto"
 [status]
     submoduleSummary = true
-    showUntrackedFiles = all
+    showUntrackedFiles = "all"
 [merge]
-	conflictstyle = diff3
+	conflictstyle = "zdiff3"
 [grep]
 	linenumber = true
     break = true
@@ -31,7 +31,7 @@
     extendedRegexp = true
 [push]
     autoSetupRemote = true
-    default = current
+    default = "current"
 [rerere]
 	enabled = true
 [commit]
