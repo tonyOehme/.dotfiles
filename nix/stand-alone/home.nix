@@ -16,6 +16,7 @@ let inherit (config.lib.file) mkOutOfStoreSymlink; in
   home = {
     packages = with pkgs; [
       vim
+      bash
       bat
       cmake
       go
