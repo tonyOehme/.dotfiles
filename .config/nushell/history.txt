@@ -1,0 +1,27 @@
+starship init zsh
+starship init nu 
+config nu 
+ls
+tldr 
+tldr vim 
+gd 
+plugin list 
+cargo 
+tldr cargo 
+gst 
+git status 
+gd
+git diff 
+n 
+nvim . 
+ls 
+eza 
+eza --icons 
+nvim . 
+n 
+vim . 
+n 
+vim . 
+config nu 
+dsfasWWdsdfasdfasdf
+config nu 
