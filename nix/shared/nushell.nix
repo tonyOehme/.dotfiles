@@ -2,6 +2,6 @@
   enable = true;
 
   shellAliases = import ./aliases.nix;
-  envFile.source = ../../.config/env.nu;
-  configFile.source = ../../.config/config.nu;
+  envFile.source = ../../.config/nushell/env.nu;
+  configFile.source = ../../.config/nushell/config.nu;
 }
