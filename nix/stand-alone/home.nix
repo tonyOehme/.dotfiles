@@ -6,6 +6,7 @@ let inherit (config.lib.file) mkOutOfStoreSymlink; in
     tmux = import ../shared/tmux.nix { inherit pkgs; };
     nushell = import ../shared/nushell.nix { inherit pkgs; };
     zsh = import ../shared/zsh.nix { inherit config pkgs lib; };
+    bash = import ../shared/bash.nix { inherit config pkgs lib; };
     zoxide = import ../shared/zoxide.nix { inherit config pkgs; };
     fzf = import ../shared/fzf.nix { inherit pkgs; };
     starship = import ../shared/starship.nix { inherit config pkgs lib; };
