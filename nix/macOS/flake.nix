@@ -27,7 +27,6 @@
             #nix repo version does not work
             "jetbrains-toolbox"
             "firefox"
-            "wezterm"
             #needs to be here because of spicetify
             "spotify"
             #maconly apps
@@ -39,10 +38,6 @@
             "betterdisplay"
             "shottr"
             "zen-browser"
-            "iina"
-            "keka"
-            "maccy"
-            "nikitabobko/tap/aerospace"
           ];
           brews = [
             "mas"
@@ -211,7 +206,11 @@
             #gui
             vesktop
             google-chrome
+            keka
             alacritty
+            aerospace
+            maccy
+            iina
             vscode
           ];
 
