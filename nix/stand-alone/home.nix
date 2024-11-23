@@ -51,7 +51,6 @@ let inherit (config.lib.file) mkOutOfStoreSymlink; in
     # You do not need to change this if you're reading this in the future.
     # Don't ever change this after the first build.  Don't ask questions.
     stateVersion = "24.05";
+    file = { ".config/nvim".source = ../../.config/nvim; };
   };
-  xdg.enable = true;
-  xdg.configFile.nvim.source = mkOutOfStoreSymlink "/home/${username}/personal/.dotfiles/.config/nvim";
 }

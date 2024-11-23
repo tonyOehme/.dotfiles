@@ -246,13 +246,7 @@
       # The platform the configuration will be used on.
 
 
-      users = [
-        "testuser"
-        "kia"
-        "tonyandyoehme"
-        "tonymacaroni"
-        "tonyyep"
-      ];
+      users = import ../shared/users.nix;
       systems = [
         "x86_64-darwin"
         "aarch64-darwin"

@@ -13,12 +13,12 @@
   prefix = "C-a";
   shell = "${pkgs.zsh}/bin/zsh";
 
-  # plugins = with pkgs.tmuxPlugins; [
-  #   tokyo-night
-  #   yank
-  #   sensible
-  #   vim-tmux-navigator
-  # ];
+  plugins = with pkgs.tmuxPlugins; [
+    # tokyo-night
+    # yank
+    sensible
+    # vim-tmux-navigator
+  ];
 
   extraConfig = builtins.readFile ../../.config/tmux/tmux.conf;
 }
