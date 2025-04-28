@@ -18,7 +18,7 @@ nix-install:
 .PHONY: install-config
 install-config:
 	nix-shell -p git --run 'git clone https://github.com/tonyOehme/.dotfiles.git $(DOTFILESDIRECTORY)'
-	sed -i '' "/testuser/a\\\t \"$(whoami)\" " $(DOTFILESDIRECTORY)/nix/macOS/flake.nix
+	sed -i '' "/testuser/a\\\t \"$(whoami)\" " $(DOTFILESDIRECTORY)/nix/shared/users.nix
 
 	nix run home-manager switch --extra-experimental-features 'nix-command flakes' --flake $(FLAKE)
 	cd $(DOTFILESDIRECTORY)
