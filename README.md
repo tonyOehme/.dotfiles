@@ -1,5 +1,13 @@
 # .dotfiles
 
+## flake appendix
+or change darwin with linux
+kernels:
+aarch64-darwin
+x86_64-darwin
+```
+#kernel/username
+```
 
 ## windows Installation
 ```
