@@ -22,7 +22,6 @@ in
     tmux = import ../shared/tmux.nix { inherit pkgs lib config; };
     zsh = import ../shared/zsh.nix { inherit pkgs lib config; };
     zoxide = import ../shared/zoxide.nix { inherit config lib pkgs; };
-    alacritty = import ../shared/alacritty.nix { inherit pkgs lib config; };
     fzf = import ../shared/fzf.nix { inherit pkgs lib config; };
     git = import ../shared/git.nix { inherit pkgs lib config; };
     wezterm = import ../shared/wezterm.nix { inherit pkgs lib config; };

@@ -9,16 +9,17 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+    homebrew-core = { url = "github:homebrew/homebrew-core"; flake = false; };
+    homebrew-cask = { url = "github:homebrew/homebrew-cask"; flake = false; };
 
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    alacritty-theme.url = "github:alexghr/alacritty-theme.nix";
   };
 
-  outputs = inputs@{ self, nix-homebrew, nix-darwin, nixpkgs, alacritty-theme, home-manager }:
+  outputs = inputs@{ self, nix-homebrew, homebrew-core, homebrew-cask, nix-darwin, nixpkgs, home-manager }:
     let
       mac_setup = { pkgs, config, ... }: {
         homebrew = {
@@ -33,11 +34,13 @@
             "docker"
             "protonvpn"
             "microsoft-office"
-            "microsoft-teams"
+            "ghostty"
             "alfred"
             "betterdisplay"
             "shottr"
             "zen-browser"
+            "visual-studio-code"
+            "google-chrome"
           ];
           brews = [
             "mas"
@@ -54,9 +57,9 @@
             mineffect = "scale";
             enable-spring-load-actions-on-all-items = true;
             persistent-apps = [
-              "${pkgs.alacritty}/Applications/Alacritty.app"
-              "${pkgs.google-chrome}/Applications/Google\ Chrome.app"
-              "${pkgs.vscode}/Applications/Visual\ Studio\ Code.app"
+              "/Applications/Ghostty.app"
+              "/Applications/Google\ Chrome.app"
+              "/Applications/Visual\ Studio\ Code.app"
               "${pkgs.vesktop}/Applications/Vesktop.app"
             ];
             orientation = "bottom";
@@ -75,11 +78,6 @@
             mru-spaces = false;
           };
 
-          universalaccess = {
-            reduceMotion = true;
-            reduceTransparency = true;
-            mouseDriverCursorSize = 4.0;
-          };
 
           finder = {
             AppleShowAllExtensions = true;
@@ -157,7 +155,7 @@
             rm -rf /Applications/Nix\ Apps
             mkdir -p /Applications/Nix\ Apps
             find ${env}/Applications -maxdepth 1 -type l -exec readlink '{}' + |
-            while read src; do
+            while read -r src; do
               app_name=$(basename "$src")
               echo "copying $src" >&2
               ${pkgs.mkalias}/bin/mkalias "$src" "/Applications/Nix Apps/$app_name"
@@ -173,7 +171,6 @@
       configuration = { pkgs, config, system, user, ... }: {
         # List packages installed in system profile. To search by name, run:
         # $ nix-env -qaP | grep wget
-        nixpkgs.overlays = [ alacritty-theme.overlays.default ];
         nixpkgs.config.allowUnfree = true;
         # for some reason this fixes home-manger
         users.users.${user} = {
@@ -205,25 +202,21 @@
             spicetify-cli
             #gui
             vesktop
-            google-chrome
             keka
-            alacritty
             aerospace
             maccy
             iina
-            vscode
           ];
 
         # fonts
         fonts.packages = [
           # nerd fonts
-          (pkgs.nerdfonts.override { fonts = [ "Meslo" "JetBrainsMono" ]; })
           # regular ass fonts
         ];
 
         # Auto upgrade nix package and the daemon service.
-        services.nix-daemon.enable = true;
         nix.package = pkgs.nix;
+        nix.enable = true;
 
         # Necessary for using flakes on this system.
         nix.settings.experimental-features = "nix-command flakes";
@@ -277,7 +270,15 @@
                     {
                       nix-homebrew =
                         if system == "aarch64-darwin"
-                        then { inherit user; enable = true; enableRosetta = true; }
+                        then {
+                          inherit user; enable = true;
+                          enableRosetta = true;
+                          taps = {
+                            "homebrew/homebrew-core" = homebrew-core;
+                            "homebrew/homebrew-cask" = homebrew-cask;
+                          };
+                          mutableTaps = false;
+                        }
                         else { inherit user; enable = true; };
                     }
 
