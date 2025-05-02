@@ -7,6 +7,7 @@
     export PATH=$PATH:$HOME/.local/bin
     export PATH=$PATH:$HOME/Library/Application\ Support/Jetbrains/Toolbox/scripts
     export PATH=$PATH:$HOME/.spicetify
+    export PATH=$PATH:$HOME/development/flutter/bin
   '';
   profileExtra = ''
 
