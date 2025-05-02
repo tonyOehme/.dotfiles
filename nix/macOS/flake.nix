@@ -40,6 +40,7 @@
             "shottr"
             "zen-browser"
             "visual-studio-code"
+            "maccy"
             "google-chrome"
           ];
           brews = [
@@ -136,6 +137,8 @@
           CustomSystemPreferences = { };
 
         };
+        security.pam.services.sudo_local.touchIdAuth = true;
+
 
         system.activationScripts.applications.text =
           let
@@ -204,7 +207,6 @@
             vesktop
             keka
             aerospace
-            maccy
             iina
           ];
 

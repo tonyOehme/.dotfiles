@@ -24,6 +24,5 @@ in
     zoxide = import ../shared/zoxide.nix { inherit config lib pkgs; };
     fzf = import ../shared/fzf.nix { inherit pkgs lib config; };
     git = import ../shared/git.nix { inherit pkgs lib config; };
-    wezterm = import ../shared/wezterm.nix { inherit pkgs lib config; };
   };
 }
