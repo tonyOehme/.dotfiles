@@ -12,6 +12,7 @@ in
       ".ideavimrc".source = ../../.ideavimrc;
       ".config/aerospace".source = ../../.config/aerospace;
       ".config/nvim".source = ../../.config/nvim;
+      ".config/ghostty/config".source = ../../.config/ghostty/config;
     };
 
   };
