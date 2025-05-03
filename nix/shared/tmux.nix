@@ -11,7 +11,6 @@
   secureSocket = true;
   terminal = "screen-256color";
   prefix = "C-a";
-  shell = "${pkgs.zsh}/bin/zsh";
 
   plugins = with pkgs.tmuxPlugins; [
     # tokyo-night
