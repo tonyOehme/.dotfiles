@@ -8,6 +8,7 @@
     export PATH=$PATH:$HOME/Library/Application\ Support/Jetbrains/Toolbox/scripts
     export PATH=$PATH:$HOME/.spicetify
     export PATH=$PATH:$HOME/development/flutter/bin
+    export PATH=$PATH:$HOME/.gem/ruby/3.3.0/bin
   '';
   profileExtra = ''
 

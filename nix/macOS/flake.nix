@@ -198,6 +198,7 @@
             eza
             ripgrep
             docker
+            ruby
             stow
             nushell
             starship
