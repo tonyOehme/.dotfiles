@@ -132,9 +132,10 @@ alias b='bat'
 alias gwtp='git pull origin $(git rev-parse --abbrev-ref HEAD)'
 
 
-for file in ~/zsh_plugins/*; do
-  [[ -f $file ]] && source "$file"
-done
 [[ ! -f ~/.zprofile ]] || source ~/.zprofile
-# Shell integrations
+[[ ! -f ~/zsh_plugins/.git.zsh ]] || source ~/zsh_plugins/.git.zsh
+[[ ! -f ~/zsh_plugins/.fzf.zsh ]] || source ~/zsh_plugins/.fzf.zsh
+[[ ! -f ~/zsh_plugins/.zsh-sudo.zsh ]] || source ~/zsh_plugins/.zsh-sudo.zsh
+
+# Szprofilehell integrations
 eval "$(zoxide init --cmd cd zsh)"

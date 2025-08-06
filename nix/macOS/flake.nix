@@ -180,7 +180,6 @@
           name = user;
           home = "/Users/${user}";
         };
-        environment.shellAliases = import ../shared/aliases.nix;
         environment.variables = import ../shared/variables.nix;
         environment.systemPackages = with pkgs;
           [
