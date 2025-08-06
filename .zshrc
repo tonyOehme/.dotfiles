@@ -1,40 +1,33 @@
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
 
-# Set the directory we want to store zinit and plugins
-ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+setopt prompt_subst
 
-# Download Zinit, if it's not there yet
-if [ ! -d "$ZINIT_HOME" ]; then
-   mkdir -p "$(dirname $ZINIT_HOME)"
-   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
-fi
+# Function to show Git branch and uncommitted changes
+git_prompt_info() {
+  local branch changes
+  if git rev-parse --is-inside-work-tree &>/dev/null; then
+    branch=$(git symbolic-ref --short HEAD 2>/dev/null || git describe --tags --exact-match 2>/dev/null)
+    changes=$(git status --porcelain 2>/dev/null | wc -l | tr -d ' ')
+    untracked=$(git status --porcelain 2>/dev/null | grep '^??' | wc -l | tr -d ' ')
+    # Only calculate ahead if origin/main exists
+    if git show-ref --verify --quiet refs/remotes/origin/main; then
+      ahead=$(git rev-list --count origin/main..HEAD 2>/dev/null)
+    else
+      ahead=0
+    fi
 
-# Source/Load zinit
-source "${ZINIT_HOME}/zinit.zsh"
+    info=" ${branch}"
 
-# Add in Powerlevel10k
-zinit ice depth=1; zinit light romkatv/powerlevel10k
+    [[ "$changes" -gt 0 ]] && info+=" !${changes}"
+    [[ "$untracked" -gt 0 ]] && info+=" ?${untracked}"
+    [[ "$ahead"   -gt 0 ]] && info+=" ↑${ahead}"
 
-# Add in zsh plugins
-zinit light zsh-users/zsh-syntax-highlighting
-zinit light zsh-users/zsh-completions
-zinit light zsh-users/zsh-autosuggestions
-zinit light Aloxaf/fzf-tab
+    echo "[${info}]"
 
-# Add in snippets
-zinit snippet OMZP::git
-zinit snippet OMZP::sudo
-zinit snippet OMZP::aws
-zinit snippet OMZP::kubectl
-zinit snippet OMZP::kubectx
-zinit snippet OMZP::command-not-found
+  fi
+}
 
-# Load completions
-autoload -Uz compinit && compinit
-
-zinit cdreplay -q
+# The prompt
+PROMPT='%F{blue}%~%f %F{green}$(git_prompt_info)%f  '
 
 # History
 HISTSIZE=5000
@@ -135,16 +128,13 @@ alias n='nvim .'
 alias c='code .'
 alias a='tmux attach'
 alias y='yazi'
-alias gap='git commit -am "automated push"; git push'
 alias b='bat'
 alias gwtp='git pull origin $(git rev-parse --abbrev-ref HEAD)'
 
 
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-[[ ! -f ~/.fzf.zsh ]] || source ~/.fzf.zsh
+for file in ~/zsh_plugins/*; do
+  [[ -f $file ]] && source "$file"
+done
 [[ ! -f ~/.zprofile ]] || source ~/.zprofile
 # Shell integrations
 eval "$(zoxide init --cmd cd zsh)"
-
-
-export PATH=$PATH:/Users/tony-andy.oehme/.spicetify
