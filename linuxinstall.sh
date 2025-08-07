@@ -16,7 +16,7 @@ install_config() {
     nix-shell -p git --run "git clone https://github.com/tonyOehme/.dotfiles.git ${DOTFILESDIRECTORY}"
 
     # Insert username in quotes after first [
-    sed -i "s/\[/[\"$(whoami)\"/" "${DOTFILESDIRECTORY}/nix/shared/users.nix"
+    sed -i "s/\[/[\n  \"$(whoami)\"/" ~/personal/.dotfiles/nix/shared/users.nix
 
     # Run home-manager switch
     nix run --extra-experimental-features 'nix-command flakes' home-manager -- switch --flake "${FLAKE}"
