@@ -1,18 +1,6 @@
 { lib, pkgs, config, username, ... }:
 let inherit (config.lib.file) mkOutOfStoreSymlink; in
 {
-  programs = {
-
-    tmux = import ../shared/tmux.nix { inherit pkgs; };
-    nushell = import ../shared/nushell.nix { inherit pkgs; };
-    zsh = import ../shared/zsh.nix { inherit config pkgs lib; };
-    bash = import ../shared/bash.nix { inherit config pkgs lib; };
-    zoxide = import ../shared/zoxide.nix { inherit config pkgs; };
-    fzf = import ../shared/fzf.nix { inherit pkgs; };
-    starship = import ../shared/starship.nix { inherit config pkgs lib; };
-    git = import ../shared/git.nix { inherit pkgs lib config; };
-
-  };
 
   home = {
     packages = with pkgs; [
@@ -21,7 +9,6 @@ let inherit (config.lib.file) mkOutOfStoreSymlink; in
       bat
       cmake
       go
-      yazi
       tree
       neovim
       unzip
@@ -51,6 +38,16 @@ let inherit (config.lib.file) mkOutOfStoreSymlink; in
     # You do not need to change this if you're reading this in the future.
     # Don't ever change this after the first build.  Don't ask questions.
     stateVersion = "24.05";
-    file = { ".config/nvim".source = ../../.config/nvim; };
+    file = {
+
+        ".config/nvim".source = mkOutOfStoreSymlink "/home/${username}/personal/.dotfiles/.config/nvim";
+        ".config/tmux".source = mkOutOfStoreSymlink "/home/${username}/personal/.dotfiles/.config/tmux";
+        ".config/nix".source = mkOutOfStoreSymlink "/home/${username}/personal/.dotfiles/.config/nix";
+        ".zshrc".source = mkOutOfStoreSymlink "/home/${username}/personal/.dotfiles/.zshrc";
+        ".zprofile".source = mkOutOfStoreSymlink "/home/${username}/personal/.dotfiles/.zprofile";
+        ".zshenv".source = mkOutOfStoreSymlink "/home/${username}/personal/.dotfiles/.zshenv";
+        ".zshrc".source = mkOutOfStoreSymlink "/home/${username}/personal/.dotfiles/.zshrc";
+        "zsh_plugins".source = mkOutOfStoreSymlink "/home/${username}/personal/.dotfiles/zsh_plugins";
+};
   };
 }
