@@ -12,6 +12,7 @@ in
       ".ideavimrc".source = mkOutOfStoreSymlink "/Users/${user}/personal/.dotfiles/.ideavimrc";
       ".config/aerospace/aerospace.toml".source = mkOutOfStoreSymlink "/Users/${user}/personal/.dotfiles/.config/aerospace/aerospace.toml";
       ".config/nvim".source = mkOutOfStoreSymlink "/Users/${user}/personal/.dotfiles/.config/nvim";
+      ".config/git".source = mkOutOfStoreSymlink "/Users/${user}/personal/.dotfiles/.config/git";
       ".config/tmux/tmux.conf".source = mkOutOfStoreSymlink "/Users/${user}/personal/.dotfiles/.config/tmux/tmux.conf";
       ".config/ghostty/config".source = mkOutOfStoreSymlink "/Users/${user}/personal/.dotfiles/.config/ghostty/config";
       ".zshrc".source = mkOutOfStoreSymlink "/Users/${user}/personal/.dotfiles/.zshrc";
