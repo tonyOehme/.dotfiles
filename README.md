@@ -29,8 +29,7 @@ xcode-select --install
 dotfiles=~/personal/.dotfiles
 nix-shell -p git --run 'git clone https://github.com/tonyOehme/.dotfiles.git ~/personal/.dotfiles'
 
-
-sed -i '' "/testuser/a\\\t \t\"$(whoami)\" " $dotfiles/nix/macOS/flake.nix
+sed -i "s/\[/[\"$(whoami)\"/" ~/personal/.dotfiles/nix/shared/users.nix
 
 nix run nix-darwin --extra-experimental-features 'nix-command flakes' -- switch --flake $dotfiles/nix/macOS#$(uname -m)-$(uname  | tr '[:upper:]' '[:lower:]')/$(whoami)
 cd $dotfiles
