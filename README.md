@@ -8,7 +8,10 @@ x86_64-darwin
 ```
 #kernel/username
 ```
-
+## linux installation 
+```
+curl https://raw.githubusercontent.com/tonyOehme/.dotfiles/refs/heads/main/linuxinstall.sh | sh
+```
 ## windows Installation
 ```
 iwr -Uri "https://raw.githubusercontent.com/tonyOehme/.dotfiles/main/windows/windows.ps1" | iex
