@@ -10,6 +10,7 @@ FLAKE="${DOTFILESDIRECTORY}/nix/stand-alone#${ARCHITECTURE}-${KERNELNAME}/${USER
 # Install config function
 install_config() {
     echo "Installing configuration..."
+    mkdir -p ~/.config/nix && echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf
 
     # Clone dotfiles repository
     nix-shell -p git --run "git clone https://github.com/tonyOehme/.dotfiles.git ${DOTFILESDIRECTORY}"
