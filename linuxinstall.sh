@@ -2,7 +2,7 @@
 
 # Set variables
 ARCHITECTURE=$(uname --processor)
-USERNAME=$(uname --nodename)
+USERNAME=$(whoami)
 KERNELNAME=$(uname --kernel-name | tr '[:upper:]' '[:lower:]')
 DOTFILESDIRECTORY=~/personal/.dotfiles
 FLAKE="${DOTFILESDIRECTORY}/nix/stand-alone#${ARCHITECTURE}-${KERNELNAME}/${USERNAME}"
