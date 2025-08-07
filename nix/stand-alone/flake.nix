@@ -16,7 +16,7 @@
         "x86_64-linux"
         "aarch64-linux"
       ];
-      users = [ "tonyo" ];
+      users = import ../shared/users.nix;
     in
     {
       homeConfigurations = builtins.listToAttrs (builtins.concatMap
