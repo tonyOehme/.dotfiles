@@ -42,6 +42,9 @@
             "visual-studio-code"
             "maccy"
             "google-chrome"
+            "zsh-autosuggestions"
+            "zsh-syntax-highlighting"
+            "zsh-completions"
           ];
           brews = [
             "mas"
@@ -245,11 +248,6 @@
         "x86_64-darwin"
         "aarch64-darwin"
       ];
-      # this seems unnecessary now
-      # outputs = builtins.concatMap
-      #   (system:
-      #     let mapper = map (user: "${system}/${user}") users; in mapper)
-      #   systems;
 
     in
     {

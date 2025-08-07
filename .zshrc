@@ -1,4 +1,3 @@
-
 setopt prompt_subst
 
 # Function to show Git branch and uncommitted changes
@@ -127,7 +126,6 @@ alias ls='eza --icons=always'
 alias n='nvim .'
 alias c='code .'
 alias a='tmux attach'
-alias y='yazi'
 alias b='bat'
 alias gwtp='git pull origin $(git rev-parse --abbrev-ref HEAD)'
 

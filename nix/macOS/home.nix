@@ -9,10 +9,15 @@ in
     homeDirectory = "/Users/${user}";
     username = user;
     file = {
-      ".ideavimrc".source = ../../.ideavimrc;
-      ".config/aerospace".source = ../../.config/aerospace;
-      ".config/nvim".source = ../../.config/nvim;
-      ".config/ghostty/config".source = ../../.config/ghostty/config;
+      ".ideavimrc".source = mkOutOfStoreSymlink "/Users/${user}/personal/.dotfiles/.ideavimrc";
+      ".config/aerospace/aerospace.toml".source = mkOutOfStoreSymlink "/Users/${user}/personal/.dotfiles/.config/aerospace/aerospace.toml";
+      ".config/nvim".source = mkOutOfStoreSymlink "/Users/${user}/personal/.dotfiles/.config/nvim";
+      ".config/tmux/tmux.conf".source = mkOutOfStoreSymlink "/Users/${user}/personal/.dotfiles/.config/tmux/tmux.conf";
+      ".config/ghostty/config".source = mkOutOfStoreSymlink "/Users/${user}/personal/.dotfiles/.config/ghostty/config";
+      ".zshrc".source = mkOutOfStoreSymlink "/Users/${user}/personal/.dotfiles/.zshrc";
+      ".zshenv".source = mkOutOfStoreSymlink "/Users/${user}/personal/.dotfiles/.zshenv";
+      ".zprofile".source = mkOutOfStoreSymlink "/Users/${user}/personal/.dotfiles/.zprofile";
+      "zsh_plugins".source = mkOutOfStoreSymlink "/Users/${user}/personal/.dotfiles/zsh_plugins";
     };
 
   };
@@ -20,10 +25,5 @@ in
 
   programs = {
     home-manager.enable = true;
-    tmux = import ../shared/tmux.nix { inherit pkgs lib config; };
-    zsh = import ../shared/zsh.nix { inherit pkgs lib config; };
-    zoxide = import ../shared/zoxide.nix { inherit config lib pkgs; };
-    fzf = import ../shared/fzf.nix { inherit pkgs lib config; };
-    git = import ../shared/git.nix { inherit pkgs lib config; };
   };
 }
