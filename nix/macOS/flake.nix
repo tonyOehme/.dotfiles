@@ -42,9 +42,6 @@
             "visual-studio-code"
             "maccy"
             "google-chrome"
-            "zsh-autosuggestions"
-            "zsh-syntax-highlighting"
-            "zsh-completions"
           ];
           brews = [
             "mas"
