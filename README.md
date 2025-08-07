@@ -8,7 +8,12 @@ x86_64-darwin
 ```
 #kernel/username
 ```
-## linux installation 
+## stow
+works with stow too go to project directory and stowrc is already there
+```
+stow .
+```
+## linux installation
 ```
 curl https://raw.githubusercontent.com/tonyOehme/.dotfiles/refs/heads/main/linuxinstall.sh | sh
 ```
@@ -16,7 +21,6 @@ curl https://raw.githubusercontent.com/tonyOehme/.dotfiles/refs/heads/main/linux
 ```
 iwr -Uri "https://raw.githubusercontent.com/tonyOehme/.dotfiles/main/windows/windows.ps1" | iex
 ```
-
 ## mac Installation
 ### Requirements
 
@@ -35,7 +39,4 @@ nix-shell -p git --run 'git clone https://github.com/tonyOehme/.dotfiles.git ~/p
 sed -i "s/\[/[\"$(whoami)\"/" ~/personal/.dotfiles/nix/shared/users.nix
 
 nix run nix-darwin --extra-experimental-features 'nix-command flakes' -- switch --flake $dotfiles/nix/macOS#$(uname -m)-$(uname  | tr '[:upper:]' '[:lower:]')/$(whoami)
-cd $dotfiles
-git submodule update --init --recursive
-stow --target=$HOME .
 ```
