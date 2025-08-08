@@ -11,7 +11,9 @@ install_config() {
     echo "Installing configuration..."
 
     mkdir -p ~/.config/nix
-    echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf
+    if [ ! grep -q "^experimental-features = nix-command flakes" ~/.config/nix/nix.conf 2>/dev/null]; then
+        echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf
+    fi
 
     # Clone dotfiles if not already cloned
     if [ ! -d "${DOTFILESDIRECTORY}" ]; then

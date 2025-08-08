@@ -9,11 +9,16 @@ FLAKE="${DOTFILESDIRECTORY}/nix/stand-alone#${ARCHITECTURE}-${KERNELNAME}/${USER
 
 # Install config function
 install_config() {
-    echo "Installing configuration..."
-    mkdir -p ~/.config/nix && echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf
+    mkdir -p ~/.config/nix
+    if [ ! grep -q "^experimental-features = nix-command flakes" ~/.config/nix/nix.conf 2>/dev/null]; then
+        echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf
+    fi
 
-    # Clone dotfiles repository
-    nix-shell -p git --run "git clone https://github.com/tonyOehme/.dotfiles.git ${DOTFILESDIRECTORY}"
+
+    # Clone dotfiles if not already cloned
+    if [ ! -d "${DOTFILESDIRECTORY}" ]; then
+        nix-shell -p git --run "git clone https://github.com/tonyOehme/.dotfiles.git ${DOTFILESDIRECTORY}"
+    fi
 
     # Insert username in quotes after first [
     sed -i "s/\[/[\n  \"$(whoami)\"/" ~/personal/.dotfiles/nix/shared/users.nix
@@ -21,6 +26,7 @@ install_config() {
     # Run home-manager switch
     nix run --extra-experimental-features 'nix-command flakes' home-manager -- switch --flake "${FLAKE}"
 }
+
 
 # Run the install
 install_config
