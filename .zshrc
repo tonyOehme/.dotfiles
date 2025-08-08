@@ -117,6 +117,9 @@ unsetopt beep                 # be quiet!
 setopt combining_chars        # combine zero-length punctuation characters (accents) with the base character
 setopt vi                     # use emacs keybindings in the shell
 
+autoload -Uz compinit
+compinit
+
 # Completion styling
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
