@@ -5,6 +5,9 @@ or change darwin with linux
 kernels:
 aarch64-darwin
 x86_64-darwin
+aarch64-linux
+x86_64-linux
+
 ```
 #kernel/username
 ```
@@ -31,12 +34,7 @@ sh <(curl -L https://nixos.org/nix/install)
 ```
 
 on a new machine paste this into terminal
+
 ```
-xcode-select --install
-dotfiles=~/personal/.dotfiles
-nix-shell -p git --run 'git clone https://github.com/tonyOehme/.dotfiles.git ~/personal/.dotfiles'
-
-sed -i "s/\[/[\"$(whoami)\"/" ~/personal/.dotfiles/nix/shared/users.nix
-
-nix run nix-darwin --extra-experimental-features 'nix-command flakes' -- switch --flake $dotfiles/nix/macOS#$(uname -m)-$(uname  | tr '[:upper:]' '[:lower:]')/$(whoami)
+curl https://raw.githubusercontent.com/tonyOehme/.dotfiles/refs/heads/main/macinstall.sh | sh
 ```
