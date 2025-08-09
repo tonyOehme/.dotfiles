@@ -10,7 +10,7 @@ FLAKE="${DOTFILESDIRECTORY}/nix/stand-alone#${ARCHITECTURE}-${KERNELNAME}/${USER
 # Install config function
 install_config() {
     mkdir -p ~/.config/nix
-    if [ ! grep -q "^experimental-features = nix-command flakes" ~/.config/nix/nix.conf 2>/dev/null]; then
+    if [ ! grep -q "^experimental-features = nix-command flakes" ~/.config/nix/nix.conf 2>/dev/null ]; then
         echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf
     fi
 
