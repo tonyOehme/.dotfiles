@@ -130,7 +130,6 @@ alias n='nvim .'
 alias c='code .'
 alias a='tmux attach'
 alias b='bat'
-alias gwtp='git pull origin $(git rev-parse --abbrev-ref HEAD)'
 
 
 [[ ! -f ~/.zprofile ]] || source ~/.zprofile
