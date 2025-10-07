@@ -23,7 +23,7 @@
               "/Applications/Google\ Chrome.app"
               "/Applications/Visual\ Studio\ Code.app"
               "/Applications/Discord.app"
-                            "/Applications/System\ Settings.app"
+              "/Applications/System\ Settings.app"
             ];
             orientation = "bottom";
             autohide = true;
@@ -113,11 +113,6 @@
         # List packages installed in system profile. To search by name, run:
         # $ nix-env -qaP | grep wget
         nixpkgs.config.allowUnfree = true;
-        # for some reason this fixes home-manger
-        users.users.${user} = {
-          name = user;
-          home = "/Users/${user}";
-        };
 
         # Auto upgrade nix package and the daemon service.
         nix.package = pkgs.nix;
