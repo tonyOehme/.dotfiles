@@ -1,57 +1,18 @@
 {
-  description = "Tony ADHD Darwin system flake";
+  description = "mac settings only";
+
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-
-    nix-darwin = {
-      url = "github:LnL7/nix-darwin";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
-    homebrew-core = { url = "github:homebrew/homebrew-core"; flake = false; };
-    homebrew-cask = { url = "github:homebrew/homebrew-cask"; flake = false; };
-
-    home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # Use `github:NixOS/nixpkgs/nixpkgs-25.05-darwin` to use Nixpkgs 25.05.
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-25.05-darwin";
+    # Use `github:nix-darwin/nix-darwin/nix-darwin-25.05` to use Nixpkgs 25.05.
+    nix-darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-25.05";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ self, nix-homebrew, homebrew-core, homebrew-cask, nix-darwin, nixpkgs, home-manager }:
+  outputs = inputs@{ self, nix-darwin, nixpkgs }:
     let
       mac_setup = { pkgs, config, ... }: {
-        homebrew = {
-          enable = true;
-          casks = [
-            #nix repo version does not work
-            "jetbrains-toolbox"
-            "firefox"
-            #needs to be here because of spicetify
-            "spotify"
-            #maconly apps
-            "docker"
-            "protonvpn"
-            "microsoft-office"
-            "ghostty"
-            "alfred"
-            "betterdisplay"
-            "shottr"
-            "zen-browser"
-            "visual-studio-code"
-            "maccy"
-            "google-chrome"
-          ];
-          brews = [
-            "mas"
-          ];
-          taps = [ ];
-          masApps = { };
-          onActivation.cleanup = "zap";
-          onActivation.autoUpdate = true;
-          onActivation.upgrade = true;
-        };
 
         system.defaults = {
           dock = {
@@ -61,7 +22,8 @@
               "/Applications/Ghostty.app"
               "/Applications/Google\ Chrome.app"
               "/Applications/Visual\ Studio\ Code.app"
-              "${pkgs.vesktop}/Applications/Vesktop.app"
+              "/Applications/Discord.app"
+                            "/Applications/System\ Settings.app"
             ];
             orientation = "bottom";
             autohide = true;
@@ -140,35 +102,11 @@
         security.pam.services.sudo_local.touchIdAuth = true;
 
 
-        system.activationScripts.applications.text =
-          let
-            env = pkgs.buildEnv {
-              name = "system-applications";
-              paths = config.environment.systemPackages;
-              pathsToLink = "/Applications";
-            };
-          in
-          pkgs.lib.mkForce ''
-            # show battery percentage in menu bar
-            echo "show battery percentage"
-            defaults write ~/Library/Preferences/ByHost/com.apple.controlcenter.plist BatteryShowPercentage -bool true
-
-            # Set up applications.
-            echo "setting up /Applications..." >&2
-            rm -rf /Applications/Nix\ Apps
-            mkdir -p /Applications/Nix\ Apps
-            find ${env}/Applications -maxdepth 1 -type l -exec readlink '{}' + |
-            while read -r src; do
-              app_name=$(basename "$src")
-              echo "copying $src" >&2
-              ${pkgs.mkalias}/bin/mkalias "$src" "/Applications/Nix Apps/$app_name"
-            done
-          '';
-
         system.keyboard = {
           enableKeyMapping = true;
           swapLeftCtrlAndFn = true;
         };
+
 
       };
       configuration = { pkgs, config, system, user, ... }: {
@@ -180,41 +118,6 @@
           name = user;
           home = "/Users/${user}";
         };
-        environment.variables = import ../shared/variables.nix;
-        environment.systemPackages = with pkgs;
-          [
-            vim
-            yazi
-            mkalias
-            neovim
-            git
-            tmux
-            tldr
-            thefuck
-            fzf
-            zoxide
-            rustup
-            eza
-            ripgrep
-            docker
-            ruby
-            stow
-            nushell
-            starship
-            nodejs_20
-            spicetify-cli
-            #gui
-            vesktop
-            keka
-            aerospace
-            iina
-          ];
-
-        # fonts
-        fonts.packages = [
-          # nerd fonts
-          # regular ass fonts
-        ];
 
         # Auto upgrade nix package and the daemon service.
         nix.package = pkgs.nix;
@@ -223,13 +126,10 @@
         # Necessary for using flakes on this system.
         nix.settings.experimental-features = "nix-command flakes";
 
-        # Create /etc/zshrc that loads the nix-darwin environment.
-        programs.zsh.enable = true; # default shell on catalina
-        # programs.fish.enable = true;
-
         # Set Git commit hash for darwin-version.
         system.configurationRevision = self.rev or self.dirtyRev or null;
 
+        system.primaryUser = user;
         # Used for backwards compatibility, please read the changelog before changing.
         # $ darwin-rebuild changelog
         system.stateVersion = 5;
@@ -262,37 +162,6 @@
 
                     configuration
                     { _module.args = { inherit system user; }; }
-
-                    nix-homebrew.darwinModules.nix-homebrew
-                    {
-                      nix-homebrew =
-                        if system == "aarch64-darwin"
-                        then {
-                          inherit user; enable = true;
-                          enableRosetta = true;
-                          taps = {
-                            "homebrew/homebrew-core" = homebrew-core;
-                            "homebrew/homebrew-cask" = homebrew-cask;
-                          };
-                          mutableTaps = false;
-                        }
-                        else { inherit user; enable = true; };
-                    }
-
-                    home-manager.darwinModules.home-manager
-                    {
-                      home-manager.useGlobalPkgs = true;
-                      home-manager.useUserPackages = true;
-                      home-manager.users =
-                        builtins.listToAttrs [
-                          {
-                            name = user;
-                            value = import ./home.nix;
-                          }
-                        ];
-
-                      home-manager.extraSpecialArgs = { inherit user; };
-                    }
 
                   ];
                 };
