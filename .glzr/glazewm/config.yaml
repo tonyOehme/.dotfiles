@@ -192,7 +192,7 @@ keybindings:
     bindings: ["alt+r"]
 
   # Disables all keybindings until alt+shift+p is pressed again.
-  - commands: ["wm-enable-binding-mode --name pause"]
+  - commands: ["wm-toggle-pause"]
     bindings: ["alt+shift+p"]
 
   # Change tiling direction. This determines where new tiling windows will
