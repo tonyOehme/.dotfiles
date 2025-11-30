@@ -95,12 +95,7 @@ window_behavior:
       shown_on_top: false
 
 workspaces:
-  - name: "Browser"
-  - name: "Email"
-  - name: "Communication"
   - name: "Music"
-  - name: "Terminal"
-  - name: "Text_Editor"
   - name: "1"
   - name: "2"
   - name: "3"
@@ -249,18 +244,8 @@ keybindings:
     bindings: ["alt+d"]
 
   # Change focus to a workspace defined in `workspaces` config.
-  - commands: ["focus --workspace Browser"]
-    bindings: ["alt+b"]
-  - commands: ["focus --workspace Email"]
-    bindings: ["alt+e"]
-  - commands: ["focus --workspace Communication"]
-    bindings: ["alt+c"]
-  - commands: ["focus --workspace Text_Editor"]
-    bindings: ["alt+x"]
   - commands: ["focus --workspace Music"]
     bindings: ["alt+m"]
-  - commands: ["focus --workspace Terminal"]
-    bindings: ["alt+t"]
   - commands: ["focus --workspace 1"]
     bindings: ["alt+1"]
   - commands: ["focus --workspace 2"]
@@ -292,18 +277,8 @@ keybindings:
     bindings: ["alt+shift+s"]
 
   # Move focused window to a workspace defined in `workspaces` config.
-  - commands: ["move --workspace Browser"]
-    bindings: ["alt+shift+b"]
-  - commands: ["move --workspace Email"]
-    bindings: ["alt+shift+e"]
-  - commands: ["move --workspace Communication"]
-    bindings: ["alt+shift+c"]
   - commands: ["move --workspace Music"]
     bindings: ["alt+shift+m"]
-  - commands: ["move --workspace Text_Editor"]
-    bindings: ["alt+shift+x"]
-  - commands: ["move --workspace Terminal"]
-    bindings: ["alt+shift+t"]
   - commands: ["move --workspace 1"]
     bindings: ["alt+shift+1"]
   - commands: ["move --workspace 2"]
