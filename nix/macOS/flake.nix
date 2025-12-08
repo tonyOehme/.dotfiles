@@ -14,7 +14,13 @@
     let
       mac_setup = { pkgs, config, ... }: {
 
+        security.pam.services.sudo_local.touchIdAuth = true;
         system.defaults = {
+
+          ".GlobalPreferences"."com.apple.mouse.scaling" = -1.0;
+          CustomSystemPreferences = { };
+          controlcenter.BatteryShowPercentage = true;
+
           dock = {
             mineffect = "scale";
             enable-spring-load-actions-on-all-items = true;
@@ -23,7 +29,6 @@
               "/Applications/Google\ Chrome.app"
               "/Applications/Visual\ Studio\ Code.app"
               "/Applications/Discord.app"
-              "/Applications/System\ Settings.app"
             ];
             orientation = "bottom";
             autohide = true;
@@ -34,7 +39,7 @@
             mouse-over-hilite-stack = true;
             expose-animation-duration = 0.0;
             launchanim = false;
-            expose-group-by-app = false;
+            expose-group-apps = false;
             show-process-indicators = true;
             show-recents = false;
             minimize-to-application = true;
@@ -43,13 +48,13 @@
 
 
           finder = {
-            AppleShowAllExtensions = true;
-            FXDefaultSearchScope = "SCcf";
-            AppleShowAllFiles = true;
+            _FXShowPosixPathInTitle = true;
             _FXSortFoldersFirst = true;
+            AppleShowAllExtensions = true;
+            AppleShowAllFiles = true;
+            FXDefaultSearchScope = "SCcf";
             QuitMenuItem = true;
             FXPreferredViewStyle = "clmv";
-            _FXShowPosixPathInTitle = true;
             FXEnableExtensionChangeWarning = true;
             ShowPathbar = true;
             ShowStatusBar = true;
@@ -91,23 +96,16 @@
             "com.apple.springing.enabled" = true;
             "com.apple.springing.delay" = 0.0;
             NSAutomaticWindowAnimationsEnabled = false;
-            KeyRepeat = 1;
-            InitialKeyRepeat = 10;
+            KeyRepeat = 3;
+            InitialKeyRepeat = 20;
           };
 
-          ".GlobalPreferences"."com.apple.mouse.scaling" = -1.0;
-          CustomSystemPreferences = { };
-
         };
-        security.pam.services.sudo_local.touchIdAuth = true;
-
 
         system.keyboard = {
           enableKeyMapping = true;
           swapLeftCtrlAndFn = true;
         };
-
-
       };
       configuration = { pkgs, config, system, user, ... }: {
         # List packages installed in system profile. To search by name, run:

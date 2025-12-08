@@ -218,16 +218,32 @@ automatically-unhide-macos-hidden-apps = false
     run = 'layout floating'
 
 [[on-window-detected]]
-    if.app-id= 'com.obsproject.obs-studio'
+    if.app-id= 'com.apple.Xcode'
     run = 'layout floating'
 
 [[on-window-detected]]
-    if.app-id= 'com.jetbrains.pycharm'
-    run = 'move-node-to-workspace 9'
+    if.app-id= 'com.apple.weather'
+    run = 'layout floating'
 
 [[on-window-detected]]
-    if.app-id= 'com.jetbrains.intellij'
-    run = 'move-node-to-workspace 9'
+    if.app-id= 'com.apple.QuickTimePlayerX'
+    run = 'layout floating'
+
+[[on-window-detected]]
+    if.app-id= 'com.apple.Preview'
+    run = 'layout floating'
+
+[[on-window-detected]]
+    if.app-id= 'com.apple.findmy'
+    run = 'layout floating'
+
+[[on-window-detected]]
+    if.app-id= 'com.apple.Console'
+    run = 'layout floating'
+
+[[on-window-detected]]
+    if.app-id= 'com.obsproject.obs-studio'
+    run = 'layout floating'
 
 [[on-window-detected]]
     if.app-id= 'com.spotify.client'
@@ -244,3 +260,11 @@ automatically-unhide-macos-hidden-apps = false
 [[on-window-detected]]
     if.app-id= 'com.hnc.Discord'
     run = 'move-node-to-workspace 4'
+
+[[on-window-detected]]
+    if.app-id= 'com.jetbrains.pycharm'
+    run = 'move-node-to-workspace 9'
+
+[[on-window-detected]]
+    if.app-id= 'com.jetbrains.intellij'
+    run = 'move-node-to-workspace 9'

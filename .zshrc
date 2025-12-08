@@ -139,3 +139,5 @@ alias b='bat'
 
 # Szprofilehell integrations
 eval "$(zoxide init --cmd cd zsh)"
+
+export PATH=$PATH:/Users/tonyandynguyen/.spicetify
